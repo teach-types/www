@@ -1,0 +1,97 @@
+name: Deploy Types www
+
+on:
+  push:         { branches: [ main, ci-* ] }
+  pull_request: { branches: [ main, ci-* ] }
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # BNFC: 2.9.5
+      PANDOC: 3.7.0.2
+
+    steps:
+
+    - name: Install pandoc
+      run: |
+        wget "https://github.com/jgm/pandoc/releases/download/${PANDOC}/pandoc-${PANDOC}-1-amd64.deb"
+        sudo dpkg -i "pandoc-${PANDOC}-1-amd64.deb"
+    # The ubuntu-shipped pandoc is too old to support e.g. 'title: ...' in md->html
+    #   run: |
+    #     sudo apt install pandoc
+
+    - name: Pandoc version
+      run: |
+        pandoc --version
+
+    # - name: Local PATH
+    #   run: |
+    #     mkdir -p "${HOME}/.local/bin"
+    #     echo "${HOME}/.local/bin" >> "${GITHUB_PATH}"
+
+    # - name: Setup Stack
+    #   run: |
+    #     stack config set system-ghc --global true
+
+    # - name: Install tectonic
+    #   run: |
+    #     cd "${HOME}/.local/bin"
+    #     curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
+
+    # - name: Tectonic version
+    #   run: |
+    #     tectonic --version
+
+    # - name: Install BNFC ${{ env.BNFC }}
+    #   run: |
+    #     wget https://github.com/BNFC/bnfc/releases/download/v${{ env.BNFC }}/bnfc-${{ env.BNFC }}-linux.binary
+    #     mv bnfc-${{ env.BNFC }}-linux.binary "${HOME}/.local/bin/bnfc"
+    #     chmod +x "${HOME}/.local/bin/bnfc"
+
+    - uses: actions/checkout@v5
+
+    - name: Build pages
+      run: |
+        make pdflatex=tectonic
+
+    # - name: Setup Pages
+    #   uses: actions/configure-pages@v3
+    #   # Needed? https://github.com/actions/starter-workflows/issues/1996
+
+    - uses: actions/upload-pages-artifact@v3
+      with:
+        path: .
+
+  # Deploy job, see https://github.com/actions/deploy-pages/tree/f81ad71d2e78487340fb3a94726f2a6050466efd#readme
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    # Add a dependency to the build job
+    needs: build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages:    write   # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
+
+    # - name: Setup Pages
+    #   uses: actions/configure-pages@v3
+    #   # Needed? https://github.com/actions/starter-workflows/issues/1996
+
+    - name: Deploy to GitHub Pages
+      id:   deployment
+      uses: actions/deploy-pages@v4

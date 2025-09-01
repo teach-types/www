@@ -63,6 +63,7 @@ Reading:
 ## Lecture 2
 
 - Termination checking
+- Data types
 - Dependent types
 - Polymorphism.
 - Propositions as sets

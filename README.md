@@ -68,6 +68,8 @@ Lectures
 - Introduction to Agda
 - Simply-typed programming in Agda
 
+[Agda code](src/Lecture1.agda), [rendered](src/html/Lecture1.html)
+
 ## Lecture 2
 
 - Termination checking

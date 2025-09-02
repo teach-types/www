@@ -18,6 +18,9 @@ jobs:
 
     steps:
 
+    - name: Install agda
+      uses: wenkokke/setup-agda@main
+
     - name: Install pandoc
       run: |
         wget "https://github.com/jgm/pandoc/releases/download/${PANDOC}/pandoc-${PANDOC}-1-amd64.deb"

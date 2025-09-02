@@ -122,3 +122,41 @@ Records and instance arguments
 ## Lecture 11
 
 Typed lambda calculus in Agda
+
+
+Software
+========
+
+We use Agda version 2.8.0.
+
+Installing Agda from binary
+---------------------------
+
+1. Download a suitable binary package from https://github.com/agda/agda/releases/tag/v2.8.0 and put it in your PATH
+2. Run `agda --setup`
+
+Installing Agda from source
+---------------------------
+
+0. Install latest Haskell (see below)
+1. Install Agda from Stackage nightly: `stack install --resolver=nightly Agda`
+2. Run `agda --setup`
+3. Set up the Agda mode (see below)
+
+Installing Haskell
+------------------
+
+1. Install [GHCup](https://www.haskell.org/ghcup/)
+2. Install latest Stack (3.7.1) and GHC (9.12.2) from within `ghcup tui`
+3. Ensure that the path printed by `stack path --local-bin` is in your system PATH
+
+Setting up the Agda mode (Emacs)
+--------------------------------
+
+1. Compile the Emacs lisp files: `agda-mode compile`
+2. Install the Agda mode: `agda-mode setup`
+
+Setting up the Agda mode (VSCode)
+---------------------------------
+
+Get the `agda-mode` extension (authored by Ting-Gian LUA).

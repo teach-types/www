@@ -49,6 +49,7 @@ Schedule
 | Tue 21/10   | 08-     |    | Take home exam | _Deadline: Fri 24/10 12:00 (noon)_ |
 
 Teachers: TC = [Thierry Coquand](http://www.cse.chalmers.se/~coquand/), AA = [Andreas Abel](http://www.cse.chalmers.se/~abela/).
+Room: Lecture hall [MC](https://maps.chalmers.se/#4746a62f-a989-4e43-8ba1-cc624c0685a2).
 
 Literature
 ==========

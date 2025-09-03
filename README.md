@@ -69,7 +69,7 @@ Lectures
 - Introduction to Agda
 - Simply-typed programming in Agda
 
-[Agda code](src/Lecture1.agda), [rendered](src/html/Lecture1.html)
+Agda code: [live code start](live/Lecture1.agda), [solution](src/Lecture1.agda), [rendered](src/html/Lecture1.html)
 
 ## Lecture 2
 

@@ -73,11 +73,8 @@ Agda code: [live code start](live/Lecture1.agda), [solution](src/Lecture1.agda),
 
 ## Lecture 2
 
-- Termination checking
-- Data types
-- Dependent types
-- Polymorphism.
-- Propositions as sets
+- General introduction to logic and dependent types [slides](slides/lecture2.pdf)
+- Example of Turing Machines in Agda, how to formulate non termination
 
 ## Exercise 1
 
@@ -88,13 +85,18 @@ We'll do some simple exercises in Agda.
 
 ## Lecture 3
 
-- Proving in Agda
+- More on Turing machines
 - Inductive predicates
 - Propositional and predicate logic
+- Propositions as Types, Natural Deduction in Agda
 
 ## Lecture 4
 
-Introduction to operational semantics and type systems
+- Data types, induction and indexed data types
+- Proof by induction on Data Types
+- Indexed Data Types: typed expression
+- Equality as an Indexed Data Type
+- Definitional Equality versus Equality as Type ("book equality")
 
 ## Lecture 5
 

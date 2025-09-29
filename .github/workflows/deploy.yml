@@ -20,6 +20,8 @@ jobs:
 
     - name: Install agda
       uses: wenkokke/setup-agda@main
+      with:
+          agda-stdlib-version: 'recommended'
 
     - name: Install pandoc
       run: |

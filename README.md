@@ -100,37 +100,53 @@ We'll do some simple exercises in Agda.
 
 ## Lecture 5
 
-Introduction to operational semantics and type systems
+- Hilbert and Gentzen calculus in Agda for propositional logic with implication
+- Show equivalence (deduction theorem)
+- Run equivalence as proof transformation
+- Untyped arithmetic expressions and operational semantics (small-step and big-step)
+- Typed predicate on arithmetic expressions
+- Progress and preservation theorems
 
 ## Lecture 6
 
-Introduction to operational semantics and type systems
+- General results on untyped lambda calculus:
+- Confluence of reduction
+- Equivalence from reduction
+- Representation of untyped lambda calculus in Agda
 
 ## Lecture 7
 
-Introduction to operational semantics and type systems
+- Correctness of a simple compiler to stack machine with addition
+- Krivine machine
 
 ## Lecture 8
 
+(Lecture 8 and following)
+
 More on operational semantics and type systems in Agda
+- Denotational semantics for typed lambda-calculus
+- Normalization for typed lambda-calculus
+- Confluence in Agda (Parallel substituion method)
+- Machine (KAM) for classical logic (Peirce CC)
+- Evidence-producing type-checker
 
 ## Lecture 9
 
-Boolean expressions and arithmetic expressions in Agda
+TBA
 
 ## Lecture 10
 
-Records and instance arguments
+TBA
 
 ## Lecture 11
 
-Typed lambda calculus in Agda
+TBA
 
 
 Software
 ========
 
-We use Agda version 2.8.0.
+We recommend Agda version 2.8.0 (recent older versions are also ok).
 
 Installing Agda from binary
 ---------------------------

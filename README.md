@@ -25,22 +25,22 @@ Schedule
 
 | Date | Time | Teacher | Title | Reading / Remark |
 |-------|----|-|----------------------------|------------------|
-| Thu 04/09   | 10-12   | AA | [Introduction to Agda](#lecture-1) | LN 1 - 3; VFP 1, 3; DTW 1, 2.1 - 2.5 |  |
-| Mon 08/09   | 13-15   | TC | [Dependent types](#lecture-2) |  |
+| Thu 04/09   | 10-12   | AA | 01 [Introduction to Agda](#lecture-1) | LN 1 - 3; VFP 1, 3; DTW 1, 2.1 - 2.5 |  |
+| Mon 08/09   | 13-15   | TC | 02 [Dependent types](#lecture-2) |  |
 | _Mon 08/09_ | _15-17_ | AA | [Getting started with Agda](#exercise-1) |  |
-| Thu 11/09   | 10-12   | TC | [Proving in Agda](#lecture-3) |  |
-| Mon 15/09   | 13-15   | TC | [Introduction to operational semantics and type systems](#lecture-4)  | TPL 1-3 |
+| Thu 11/09   | 10-12   | TC | 03 [Proving in Agda](#lecture-3) |  |
+| Mon 15/09   | 13-15   | TC | 04 [Introduction to operational semantics and type systems](#lecture-4)  | TPL 1-3 |
 | _Mon 15/09_ | _15-17_ | TC | [More on Agda](#exercise-2) | _Homework 1 due_  |
-| Thu 18/09   | 10-12   | TC | [Introduction to operational semantics and type systems](#lecture-5)  | TPL 3-4 |
-| Mon 22/09   | 13-15   | TC | [Introduction to operational semantics and type systems](#lecture-6)  | TPL 5-10 |
+| Thu 18/09   | 10-12   | TC | 05 [Introduction to operational semantics and type systems](#lecture-5)  | TPL 3-4 |
+| Mon 22/09   | 13-15   | TC | 06 [Introduction to operational semantics and type systems](#lecture-6)  | TPL 5-10 |
 | _Mon 22/09_ | _15-17_ | TC | [More on Agda](#exercise-3) | _Homework 2 due_  |
-| Thu 25/09   | 10-12   | TC | [Introduction to operational semantics and type systems](#lecture-7)  |  |
-| Mon 29/09   | 13-15   | AA | [More on operational semantics and type systems in Agda](#lecture-8)  |  |
+| Thu 25/09   | 10-12   | TC | 07 [Introduction to operational semantics and type systems](#lecture-7)  |  |
+| Mon 29/09   | 13-15   | AA | 08 [Bidirectional type-checking](#lecture-8)  |  |
 | _Mon 29/09_ | _15-17_ | AA | [More on Agda](#exercise-4) | _Homework 3 due_  |
-| Thu 02/10   | 10-12   | AA | [More on operational semantics and type systems in Agda](#lecture-9)  |  |
-| Mon 06/10   | 13-15   | AA | [More on operational semantics and type systems in Agda](#lecture-10) |  |
+| Thu 02/10   | 10-12   | AA | 09 [More on operational semantics and type systems in Agda](#lecture-9)  |  |
+| Mon 06/10   | 13-15   | AA | 10 [More on operational semantics and type systems in Agda](#lecture-10) |  |
 | _Mon 06/10_ | _15-17_ | AA | [Exercises on operational semantics and type systems in Agda](#exercise-5) | _Homework 4 due_  |
-| Thu 09/10   | 10-12   | AA | [More on operational semantics and type systems in Agda](#lecture-11) |  |
+| Thu 09/10   | 10-12   | AA | 11 [More on operational semantics and type systems in Agda](#lecture-11) |  |
 | Mon 13/10   | 13-15   | TC | Student presentations |   |
 | Mon 13/10   | 15-17   | TC | Student presentations |   |
 | Thu 16/10   | 10-12   | TC | Student presentations |   |
@@ -121,18 +121,19 @@ We'll do some simple exercises in Agda.
 
 ## Lecture 8
 
-(Lecture 8 and following)
-
-More on operational semantics and type systems in Agda
+- Well-typed lambda-terms
 - Denotational semantics for typed lambda-calculus
-- Normalization for typed lambda-calculus
-- Confluence in Agda (Parallel substituion method)
-- Machine (KAM) for classical logic (Peirce CC)
+- Bidirectional type-checker
 - Evidence-producing type-checker
 
 ## Lecture 9
 
-TBA
+(Lecture 9 and following)
+
+More on operational semantics and type systems in Agda
+- Normalization for typed lambda-calculus
+- Confluence in Agda (Parallel substituion method)
+- Machine (KAM) for classical logic (Peirce CC)
 
 ## Lecture 10
 

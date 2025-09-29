@@ -126,6 +126,10 @@ We'll do some simple exercises in Agda.
 - Bidirectional type-checker
 - Evidence-producing type-checker
 
+Agda code: [live code start](live/stlc/Lecture8.agda),
+[full](src/stlc/Lecture8.agda),
+[rendered](src/html/Lecture8.html)
+
 ## Lecture 9
 
 (Lecture 9 and following)

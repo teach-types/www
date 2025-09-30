@@ -1,3 +1,5 @@
+{-# OPTIONS --allow-unsolved-metas #-}
+
 -- Bidirectional checker for the STLC.
 
 module Check where
@@ -65,52 +67,23 @@ mutual
   infer : Scope Γ → Exp → Infer Γ
 
   -- Case: Γ ⊢ x ⇉ ?.
-  infer sc (var x) =
-    case lookupIdent sc x of λ where
-      nothing → failed (unboundIdentifier x)
-      (just (a , y)) → inferred a (var y)
+  infer sc (var x) = {!!}
 
   -- Case: Γ ⊢ f e ⇉ ?.
-  infer sc (app f e) =
-    -- Infer Γ ⊢ f ⇉ ?.
-    case infer sc f of λ where
-      -- Case Γ ⊢ f ⇉ a ⇒ b.
-      (inferred (a ⇒ b) t) →
-        -- Check Γ ⊢ e ⇇ a.
-        case check sc e a of λ where
-          (checked u) → inferred b (app t u)
-          (failed err) → failed err
-      -- Case Γ ⊢ f ⇉ α
-      (inferred a t) → failed (applyNonFunction a e)
-      (failed err)   → failed err
+  infer sc (app f e) = {!!}
 
   -- Case Γ ⊢ (λ x → e) ⇉ ?.  Fail.
   infer sc (abs (uBind x) e) = failed inferUntypedLambda
 
   -- Case Γ ⊢ (λ (x : a) → e) ⇉ ?.
-  infer sc (abs (tBind x a) e) =
-    -- Infer Γ, x:a ⊢ e ⇉ b.
-    case infer (cons x a sc) e of λ where
-      (inferred b t) → inferred (a ⇒ b) (abs t)
-      (failed err) → failed err
+  infer sc (abs (tBind x a) e) = {!!}
 
   -- Check an expression against a type.  Γ ⊢ e ⇇ a
 
   check : Scope Γ → Exp → (a : Ty) → Check Γ a
 
   -- Case: Γ ⊢ λ x → e ⇇ a ⇒ c.
-  check sc (abs (uBind x) e) (a ⇒ c) =
-    -- Check Γ, x:a ⊢ e ⇇ c.
-    case check (cons x a sc) e c of λ where
-      (checked t) → checked (abs t)
-      (failed err) → failed err
+  check sc (abs (uBind x) e) (a ⇒ c) = {!!}
 
   -- Otherwise: try to infer.  Γ ⊢ e ⇉ b
-  check sc e a =
-    case infer sc e of λ where
-      (inferred b u) →
-         -- Compare given and inferred type.
-         case eqType b a of λ where
-           (yes refl) → checked u
-           (no _) → failed (notSubtype b a)
-      (failed err) → failed err
+  check sc e a = {!!}

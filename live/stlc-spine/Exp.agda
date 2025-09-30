@@ -20,8 +20,8 @@ infixr  9 _⇒_
 Ident = String
 
 data Bind : Type where
-  uBind : (x : Ident) → Bind
-  tBind : (x : Ident) (t : Ty) → Bind
+  uBind : (x : Ident) → Bind            -- λ x → t
+  tBind : (x : Ident) (t : Ty) → Bind   -- λ (x : A) → t
 
 -- Expressions in spine form.
 -- Applications are gathered.
@@ -36,7 +36,7 @@ pattern lam b e = abs b e []
 -- Smart constructor for expressions.
 
 apps : Exp → List Exp → Exp
-apps (ne  x   es) es' = ne  x (es ++ es')
+apps (ne  x   es) es' = ne  x   (es ++ es')
 apps (abs b e es) es' = abs b e (es ++ es')
 
 -- Reassociate types (for parsing).

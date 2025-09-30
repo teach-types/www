@@ -10,7 +10,7 @@ private
 
 module Den (ξ : BaseTy → Set) where
 
-  Value : Ty → Set
+  Value : Ty → Set     -- ⟦ ⟧
   Value (` α)   = ξ α
   Value (a ⇒ b) = Value a → Value b
 

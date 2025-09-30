@@ -130,6 +130,8 @@ Agda code (expressions in spine form): [live code start](live/stlc-spine/Lecture
 
 ## Lecture 9
 
+Agda code: [live code start](live/stlc/Lecture9.agda), [full](src/stlc/Lecture9.agda), [rendered](src/html/Lecture9.html)
+
 (Lecture 9 and following)
 
 More on operational semantics and type systems in Agda

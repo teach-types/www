@@ -123,12 +123,10 @@ We'll do some simple exercises in Agda.
 
 - Well-typed lambda-terms
 - Denotational semantics for typed lambda-calculus
-- Bidirectional type-checker
+- [Bidirectional type-checker](https://www.haskellforall.com/2022/06/the-appeal-of-bidirectional-type.html)
 - Evidence-producing type-checker
 
-Agda code: [live code start](live/stlc/Lecture8.agda),
-[full](src/stlc/Lecture8.agda),
-[rendered](src/html/Lecture8.html)
+Agda code (expressions in spine form): [live code start](live/stlc-spine/Lecture8.agda), [full](src/stlc-spine/Lecture8.agda), [rendered](src/html/Lecture8.html)
 
 ## Lecture 9
 

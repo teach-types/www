@@ -184,3 +184,24 @@ Setting up the Agda mode (VSCode)
 ---------------------------------
 
 Get the `agda-mode` extension (authored by Ting-Gian LUA).
+
+Installing the Agda standard library
+------------------------------------
+
+To install a library for Agda, it must be downloaded and the path to its `.agda-lib` file must be mentioned in the file `$AGDA_APP_DIR/libraries`, where `$AGDA_APP_DIR` is the directory printed by `agda --print-agda-app-dir`.
+
+For instance, to install the Agda standard library, you can follow these steps.
+
+1. Download the version of the standard library for your Agda version according to https://wiki.portal.chalmers.se/agda/Libraries/StandardLibrary .
+   For Agda 2.8.0, this is [version 2.3](https://github.com/agda/agda-stdlib/releases/tag/v2.3).
+2. Unpack the library into a directory of your choice, for instance (on Linux/MacOS):
+   `~/.agda/libraries.d/standard-library`
+3. Recommended: in this directory rename `agda-stdlib-2.3` to `v2.3` (or similar).
+4. Add the following line to your `~/.agda/libraries` file (create it if it does not exist):
+   ```
+   ~/.agda/libraries.d/standard-library/v2.3/standard-library.agda-lib
+   ```
+   In this you need to expand `~` manually to your home folder.
+
+On Windows, the `libraries` file might reside in another directory than `~/.agda`.
+Check the output of `agda --print-agda-app-dir`.

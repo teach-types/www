@@ -9,14 +9,14 @@ open import Data.Unit.Base          public using (⊤; tt)
 open import Data.List.Base          public using (List; []; _∷_; [_]; _++_; concat; reverse; head) hiding (module List)
 open import Data.List.NonEmpty.Base public using (List⁺; _∷_; _∷⁺_) hiding (module List⁺)
 open import Data.Maybe.Base         public using (Maybe; nothing; just)
-open import Data.Product.Base       public using (∃; _×_; _,_; proj₁; proj₂)
+open import Data.Product.Base       public using (Σ; ∃; _×_; _,_; proj₁; proj₂)
 open import Data.String.Base        public using (String)
 open import Data.Nat.Base           public using (ℕ; zero; suc) hiding (module ℕ)
 
 open import Function                public using (id; _∘_; _$_; _|>_; case_of_; flip)
 
-open import Relation.Binary.PropositionalEquality public using (_≡_; refl)
-open import Relation.Nullary                      public using (Dec; yes; no)
+open import Relation.Binary.PropositionalEquality public using (_≡_; refl; subst; cong; cong₂)
+open import Relation.Nullary                      public using (¬_; Dec; yes; no)
 
 module String where
   open Data.String.Base public using (_++_; concat; fromList; toList)

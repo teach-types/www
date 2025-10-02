@@ -51,10 +51,8 @@ private
 --    APar.  Atm  ::= '(' Exp ')'
 --    AId.   Atm  ::= Ident
 --
---    Exp.   Exp  ::= Exps              -- Post-process the list
---
---    Exps.  Exps ::= Atm Rest          -- Ident, '('
---    ELam.  Exps ::= 'λ' Bind '→' Exp
+--    EApp.  Exp  ::= Atm Rest          -- Ident, '('
+--    ELam.  Exp  ::= 'λ' Bind '→' Exp
 --
 --    REmp.  Rest ::= {- empty -}
 --    RAtm.  Rest ::= Exp               -- Ident, '(', 'λ'

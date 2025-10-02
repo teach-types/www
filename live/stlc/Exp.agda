@@ -58,10 +58,18 @@ inj⇒r refl = refl
 -- discr-l : ∀{α b c} → (` α) ≡ (b ⇒ c) → ⊥
 -- discr-l ()
 
+variable
+  α β : BaseTy
+
+-- lemma : Dec (α ≡ β) → Dec (` α ≡ ` β)
+-- lemma (yes refl) = yes {!!}
+-- lemma (no p) = no {!!}
+
 eqType : (a b : Ty) → Dec (a ≡ b)
 
 -- Case: both type constants
 
+-- eqType (` α) (` β) = lemma (α String.≟ β)
 eqType (` α) (` β) =
   case α String.≟ β of λ where
     (yes refl) → yes refl

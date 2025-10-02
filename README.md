@@ -189,6 +189,7 @@ Installing the Agda standard library
 ------------------------------------
 
 To install a library for Agda, it must be downloaded and the path to its `.agda-lib` file must be mentioned in the file `$AGDA_APP_DIR/libraries`, where `$AGDA_APP_DIR` is the directory printed by `agda --print-agda-app-dir`.
+(In case this directory does not exist yet, please create it.)
 
 For instance, to install the Agda standard library, you can follow these steps.
 

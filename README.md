@@ -130,18 +130,28 @@ Agda code (expressions in spine form): [live code start](live/stlc-spine/Lecture
 
 ## Lecture 9
 
+Implementation of simply-typed lambda-calculus (STLC), continued.
+
+- the _parse, don't validate_ principle
+- bidirectional checking implemented in Agda
+- `with` vs. `case ... of \ where` vs. local functions
+- working with equality proofs (`subst`, `cong`)
+- deciding equality
+- lexer for the syntax of STLC
+- grammar of STLC
+- (briefly: parser monad)
+
 Agda code: [live code start](live/stlc/Lecture9.agda), [full](src/stlc/Lecture9.agda), [rendered](src/html/Lecture9.html)
 
-(Lecture 9 and following)
+## Lecture 10
+
+(Lecture 10 and following)
 
 More on operational semantics and type systems in Agda
 - Normalization for typed lambda-calculus
 - Confluence in Agda (Parallel substituion method)
 - Machine (KAM) for classical logic (Peirce CC)
 
-## Lecture 10
-
-TBA
 
 ## Lecture 11
 

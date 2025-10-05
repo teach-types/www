@@ -126,7 +126,7 @@ We'll do some simple exercises in Agda.
 - [Bidirectional type-checker](https://www.haskellforall.com/2022/06/the-appeal-of-bidirectional-type.html)
 - Evidence-producing type-checker
 
-Agda code (expressions in spine form): [live code start](live/stlc-spine/), [full](src/stlc-spine/), [rendered](src/html/Lecture8.html)
+Agda code (expressions in spine form, superseded by lecture 9): [live code start](live/stlc-spine/), [full](src/stlc-spine/), [rendered](src/stlc-spine/html/Lecture8.html)
 
 ## Lecture 9
 
@@ -141,7 +141,7 @@ Implementation of simply-typed lambda-calculus (STLC), continued.
 - grammar of STLC
 - (briefly: parser monad)
 
-Agda live code: [start](live/stlc-lec9-start/), [finish](live/stlc/), [solution](src/stlc/), [rendered](src/html/Lecture9.html)
+Agda live code: [start](live/stlc-lec9-start/), [finish](live/stlc/), [solution](src/stlc/), [rendered](src/stlc/html/Lecture9.html)
 
 ## Lecture 10
 

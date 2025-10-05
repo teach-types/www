@@ -1,5 +1,5 @@
 *.agdai
 MAlonzo/**
 *~
-/index.html
-/src/html/
+index.html
+html/

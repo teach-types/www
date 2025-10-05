@@ -1,13 +1,15 @@
+DIRS=stlc stlc-spine
+
 .PHONY: all
-all: html stlc index.html
+all: html index.html $(DIRS)
 
 .PHONY: html
 html:
 	agda --html Everything.agda
 
-.PHONY: stlc
-stlc:
-	make -C stlc
+.PHONY: $(DIRS)
+$(DIRS) : % :
+	make -C $*
 
 .PHONY: index.html
 index.html :

@@ -3,7 +3,7 @@ all: index.html html
 
 .PHONY: html
 html :
-	agda --html Lecture9.agda
+	agda --html Lecture8.agda
 
 .PHONY: index.html
 index.html :

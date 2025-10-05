@@ -126,7 +126,7 @@ We'll do some simple exercises in Agda.
 - [Bidirectional type-checker](https://www.haskellforall.com/2022/06/the-appeal-of-bidirectional-type.html)
 - Evidence-producing type-checker
 
-Agda code (expressions in spine form): [live code start](live/stlc-spine/Lecture8.agda), [full](src/stlc-spine/Lecture8.agda), [rendered](src/html/Lecture8.html)
+Agda code (expressions in spine form): [live code start](live/stlc-spine/), [full](src/stlc-spine/), [rendered](src/html/Lecture8.html)
 
 ## Lecture 9
 

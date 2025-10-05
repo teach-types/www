@@ -1,0 +1,5 @@
+
+index.html : $(files)
+	tree -H '.' -L 2 --noreport --charset utf-8 > $@
+
+# EOF

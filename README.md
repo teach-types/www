@@ -141,9 +141,11 @@ Implementation of simply-typed lambda-calculus (STLC), continued.
 - grammar of STLC
 - (briefly: parser monad)
 
-Agda live code: [start](live/stlc-lec9-start/), [finish](live/stlc/), [solution](src/stlc/), [rendered](src/stlc/html/Lecture9.html)
+Agda live code: [start](live/stlc-lec9-start/), [finish](live/stlc-check/), [solution](src/stlc-check/), [rendered](src/stlc-check/html/Lecture9.html)
 
 ## Lecture 10
+
+Agda live code: [start](live/stlc-lec10-start/), [finish](live/stlc/), [solution](src/stlc/), [rendered](src/stlc/html/Lecture9.html)
 
 (Lecture 10 and following)
 

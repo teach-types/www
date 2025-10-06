@@ -1,3 +1,5 @@
+{-# OPTIONS --allow-unsolved-metas #-}
+
 -- Properties of weakenings
 
 module Term.Weakening.Properties where
@@ -150,11 +152,7 @@ comp-id-W {ρ' = ρ'} {ρ = ρ} = subst (λ ρ → compWW ρ ρ' ≡ ρ') (idW-u
 -- Proof by induction on the first weakening and cases on the second.
 
 lookupW-lookupW : lookupW (compWW ρ ρ') x ≡ lookupW ρ (lookupW ρ' x)
-lookupW-lookupW {ρ = skip ρ}                            = cong suc (lookupW-lookupW {ρ = ρ})
-lookupW-lookupW {ρ = keep ρ} {ρ' = skip ρ'}             = cong suc (lookupW-lookupW {ρ = ρ})
-lookupW-lookupW {ρ = keep ρ} {ρ' = keep ρ'} {x = suc x} = cong suc (lookupW-lookupW {ρ = ρ})
-lookupW-lookupW {ρ = keep ρ} {ρ' = keep ρ'} {x = zero}  = refl
-lookupW-lookupW {ρ = done}   {ρ' = done}    {x = ()}
+lookupW-lookupW {ρ = ρ} {ρ' = ρ'} = {!!}
 
 -- Composing weakings: applying a composition of weakenings is the composition
 -- of the applications.

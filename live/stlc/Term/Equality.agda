@@ -1,3 +1,5 @@
+{-# OPTIONS --allow-unsolved-metas #-}
+
 -- Typed βη equality for the simply typed lambda calculus.
 --
 -- β would be the same for the untyped lambda calculus,
@@ -52,11 +54,13 @@ wk-≅ : t ≅ t' → wk ρ t ≅ wk ρ t'
 -- We need the fact that wk over the single substitution,
 --    wk-sg : (wk (keep ρ) t) [ wk ρ u ]₀ ≡ wk ρ (t [ u ]₀)
 -- to conclude the proof by a cast ("subst").
-wk-≅ {ρ = ρ} (β {t = t} {u = u}) =
-  subst
-    (app (abs (wk (keep ρ) t)) (wk ρ u) ≅_)
-    (wk-sg {t = t})  -- wk (keep ρ) t) [ wk ρ u ]₀  ≡ wk ρ (t [ u ]₀)
-    β
+wk-≅ {ρ = ρ} (β {t = t} {u = u}) = {!!}
+
+
+  -- subst
+  --   (app (abs (wk (keep ρ) t)) (wk ρ u) ≅_)
+  --   (wk-sg {t = t})  -- wk (keep ρ) t) [ wk ρ u ]₀  ≡ wk ρ (t [ u ]₀)
+  --   β
 
 -- Case η-expansion: Show wk ρ t ≅ wk ρ (abs (app (wk1 t) (var zero)))
 --                               = abs (wk (keep ρ) (app (wk1 t) (var zero)))

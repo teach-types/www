@@ -1,4 +1,4 @@
--- {-# OPTIONS --allow-unsolved-metas #-}
+{-# OPTIONS --allow-unsolved-metas #-}
 
 -- Properties of substitutions and their operations.
 -- This includes the category laws, but also laws of composing substitutions with weakenings,
@@ -252,8 +252,7 @@ sub-comp           {t = abs t}   = cong abs (trans (sub-comp {t = t}) (cong (λ 
 sub-comp           {t = app t u} = cong₂ app (sub-comp {t = t}) (sub-comp {t = u})
 
 assocSSS : compSS (compSS σ₁ σ₂) σ₃ ≡ compSS σ₁ (compSS σ₂ σ₃)
-assocSSS {σ₁ = σ₁} {σ₂ = σ₂} {σ₃ = []} = refl
-assocSSS {σ₁ = σ₁} {σ₂ = σ₂} {σ₃ = t ∷ σ₃} = cong₂ _∷_ (sym (sub-comp {t = t})) assocSSS
+assocSSS {σ₁ = σ₁} {σ₂ = σ₂} {σ₃ = σ₃} = {!!}
 
 -- Payload: a lemma we are actually using for β.
 

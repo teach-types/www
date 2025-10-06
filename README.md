@@ -145,19 +145,25 @@ Agda live code: [start](live/stlc-lec9-start/), [finish](live/stlc-check/), [sol
 
 ## Lecture 10
 
-Agda live code: [start](live/stlc-lec10-start/), [finish](live/stlc/), [solution](src/stlc/), [rendered](src/stlc/html/Lecture9.html)
+Normalization for typed lambda-calculus
 
-(Lecture 10 and following)
+- βη-equality
+- weakening
+- substitution
+- η-long β-normal forms
+- weak normalization
+- reducibility
 
-More on operational semantics and type systems in Agda
-- Normalization for typed lambda-calculus
-- Confluence in Agda (Parallel substituion method)
-- Machine (KAM) for classical logic (Peirce CC)
+Agda live code: [start](live/stlc/), [solution](src/stlc/), [rendered](src/stlc/html/Lecture9.html)
 
 
 ## Lecture 11
 
-TBA
+Possible topics:
+
+- Confluence in Agda (Parallel substituion method)
+- Machine (KAM) for classical logic (Peirce CC)
+
 
 
 Software

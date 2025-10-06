@@ -154,7 +154,7 @@ Normalization for typed lambda-calculus
 - weak normalization
 - reducibility
 
-Agda live code: [start](live/stlc/), [solution](src/stlc/), [rendered](src/stlc/html/Lecture9.html)
+Agda live code: [start](live/stlc/), [solution](src/stlc/), [rendered](src/stlc/html/Lecture10.html)
 
 
 ## Lecture 11

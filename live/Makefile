@@ -1,4 +1,4 @@
-DIRS=stlc stlc-lec9-start stlc-spine
+DIRS=stlc stlc-check stlc-lec9-start stlc-spine
 
 .PHONY: all
 all: index.html $(DIRS)

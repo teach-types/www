@@ -2,6 +2,8 @@
 
 -- Properties of weakenings
 
+-- Tricky is to convince Agda that Wk Γ (a ∷ Γ) is impossible.
+
 module Term.Weakening.Properties where
 
 open import Prelude
@@ -35,8 +37,8 @@ private
 -- otherwise it is a "keep", then the proof is immediate.
 
 Wk-cons-inv : Wk Γ (a ∷ Δ) → ∃ λ Γ₁ → ∃ λ Γ₂ → (Γ ≡ Γ₁ ++ a ∷ Γ₂) × Wk Γ₂ Δ
-Wk-cons-inv (skip ρ) with Wk-cons-inv ρ
-... | Γ₁ , Γ₂ , refl , ρ' = (_ ∷ Γ₁) , _ , refl , ρ'
+Wk-cons-inv (skip {a = b} ρ) with Wk-cons-inv ρ
+... | Γ₁ , Γ₂ , refl , ρ' = (b ∷ Γ₁) , _ , refl , ρ'
 Wk-cons-inv (keep ρ) = [] , _ , refl , ρ
 
 -- The lemma can be generalized to  ρ : Wk Γ (Δ₁ ++ a ∷ Δ₂).

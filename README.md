@@ -1,7 +1,7 @@
 ---
 title: Types for Programs and Proofs
 subtitle: DAT350 (Chalmers) / DIT235 (GU)
-date: Fall Term 2025 (LP1)
+date: Fall Term 2026 (LP1)
 ---
 
 <link rel="stylesheet" href="gh-fork-ribbon.css" />
@@ -10,43 +10,46 @@ date: Fall Term 2025 (LP1)
 
 ![Agda logo](agda.svg){#id .class width=480}
 
-Most course information is on [Canvas](https://chalmers.instructure.com/courses/35737).
+Most course information is on [Canvas](https://chalmers.instructure.com/courses/41019).
 
 Further course links:
-[Schedule on TimeEdit](https://cloud.timeedit.net/chalmers/web/public/riq30Qy6565ZZ5Q59g7650Z56YZ6019X67oY40QQ06o0gQ176qQY.html) /
-[Chalmers studieportal](https://www.student.chalmers.se/sp/course?course_id=40833) /
+[Schedule on TimeEdit](https://cloud.timeedit.net/chalmers/web/public/ri15730Qgv0ZQYQ1005669y35Y1gQZ9Y506x1XZQ6.html) /
+[Chalmers studieportal](https://www.student.chalmers.se/sp/course?course_id=44940) /
 [GU ad (sv)](https://www.gu.se/studera/hitta-utbildning/typer-for-program-och-bevis-dit235) /
 [GU kursplan](http://kursplaner.gu.se/pdf/kurs/sv/DIT235) /
 [GU course description](http://kursplaner.gu.se/pdf/kurs/en/DIT235) /
-[Old course page](https://www.cse.chalmers.se/~coquand/TYPES2.html)
+[Course page 2025](2025/index.html)
+
 
 Schedule
 ========
 
+This schedule is preliminary!
+
 | Date | Time | Teacher | Title | Reading / Remark |
 |-------|----|-|----------------------------|------------------|
-| Thu 04/09   | 10-12   | AA | 01 [Introduction to Agda](#lecture-1) | LN 1 - 3; VFP 1, 3; DTW 1, 2.1 - 2.5 |  |
-| Mon 08/09   | 13-15   | TC | 02 [Dependent types](#lecture-2) |  |
-| _Mon 08/09_ | _15-17_ | AA | [Getting started with Agda](#exercise-1) |  |
-| Thu 11/09   | 10-12   | TC | 03 [Proving in Agda](#lecture-3) |  |
-| Mon 15/09   | 13-15   | TC | 04 [Introduction to operational semantics and type systems](#lecture-4)  | TPL 1-3 |
-| _Mon 15/09_ | _15-17_ | TC | [More on Agda](#exercise-2) | _Homework 1 due_  |
-| Thu 18/09   | 10-12   | TC | 05 [Introduction to operational semantics and type systems](#lecture-5)  | TPL 3-4 |
-| Mon 22/09   | 13-15   | TC | 06 [Introduction to operational semantics and type systems](#lecture-6)  | TPL 5-10 |
-| _Mon 22/09_ | _15-17_ | TC | [More on Agda](#exercise-3) | _Homework 2 due_  |
-| Thu 25/09   | 10-12   | TC | 07 [Introduction to operational semantics and type systems](#lecture-7)  |  |
-| Mon 29/09   | 13-15   | AA | 08 [Bidirectional type-checking](#lecture-8)  |  |
-| _Mon 29/09_ | _15-17_ | AA | [More on Agda](#exercise-4) | _Homework 3 due_  |
-| Thu 02/10   | 10-12   | AA | 09 [More on operational semantics and type systems in Agda](#lecture-9)  |  |
-| Mon 06/10   | 13-15   | AA | 10 [More on operational semantics and type systems in Agda](#lecture-10) |  |
-| _Mon 06/10_ | _15-17_ | AA | [Exercises on operational semantics and type systems in Agda](#exercise-5) | _Homework 4 due_  |
-| Thu 09/10   | 10-12   | AA | 11 [More on operational semantics and type systems in Agda](#lecture-11) |  |
-| Mon 13/10   | 13-15   | TC | Student presentations |   |
-| Mon 13/10   | 15-17   | TC | Student presentations |   |
-| Thu 16/10   | 10-12   | TC | Student presentations |   |
-| Mon 20/10   | 13-15   | TC | Student presentations |   |
-| Mon 20/10   | 15-17   | TC | Student presentations |   |
-| Tue 21/10   | 08-     |    | Take home exam | _Deadline: Fri 24/10 18:00_ |
+| Thu 03/09   | 10-12   | AA | 01 [Introduction to Agda](#lecture-1) | LN 1 - 3; VFP 1, 3; DTW 1, 2.1 - 2.5 |  |
+| Mon 07/09   | 13-15   | TC | 02 [Dependent types](#lecture-2) |  |
+| _Mon 07/09_ | _15-17_ | AA | [Getting started with Agda](#exercise-1) |  |
+| Thu 10/09   | 10-12   | AA | 03 [Proving in Agda](#lecture-3) |  |
+| Mon 14/09   | 13-15   | AA | 04 [Introduction to operational semantics and type systems](#lecture-4)  | TPL 1-3 |
+| _Mon 14/09_ | _15-17_ | TC | [More on Agda](#exercise-2) | _Homework 1 due_  |
+| Thu 17/09   | 10-12   | TC | 05 [Introduction to operational semantics and type systems](#lecture-5)  | TPL 3-4 |
+| Mon 21/09   | 13-15   | TC | 06 [Introduction to operational semantics and type systems](#lecture-6)  | TPL 5-10 |
+| _Mon 21/09_ | _15-17_ | TC | [More on Agda](#exercise-3) | _Homework 2 due_  |
+| Thu 24/09   | 10-12   | TC | 07 [Introduction to operational semantics and type systems](#lecture-7)  |  |
+| Mon 28/09   | 13-15   | AA | 08 [Bidirectional type-checking](#lecture-8)  |  |
+| _Mon 28/09_ | _15-17_ | AA | [More on Agda](#exercise-4) | _Homework 3 due_  |
+| Thu 01/10   | 10-12   | AA | 09 [More on operational semantics and type systems in Agda](#lecture-9)  |  |
+| Mon 05/10   | 13-15   | AA | 10 [More on operational semantics and type systems in Agda](#lecture-10) |  |
+| _Mon 05/10_ | _15-17_ | AA | [Exercises on operational semantics and type systems in Agda](#exercise-5) | _Homework 4 due_  |
+| Thu 08/10   | 10-12   | AA | 11 [More on operational semantics and type systems in Agda](#lecture-11) |  |
+| Mon 12/10   | 13-15   | TC | Student presentations |   |
+| Mon 12/10   | 15-17   | TC | Student presentations |   |
+| Thu 15/10   | 10-12   | TC | Student presentations |   |
+| Mon 19/10   | 13-15   | TC | Student presentations |   |
+| Mon 19/10   | 15-17   | TC | Student presentations |   |
+| Tue 20/10   | 08-     |    | Take home exam | _Deadline: Fri 23/10 18:00_ |
 
 Teachers: TC = [Thierry Coquand](http://www.cse.chalmers.se/~coquand/), AA = [Andreas Abel](http://www.cse.chalmers.se/~abela/).
 Room: Lecture hall [MC](https://maps.chalmers.se/#4746a62f-a989-4e43-8ba1-cc624c0685a2).

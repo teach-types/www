@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Test.Check</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Comment">-- Testing the type checker</a>
+
+<a id="30" class="Keyword">module</a> <a id="37" href="Test.Check.html" class="Module">Test.Check</a> <a id="48" class="Keyword">where</a>
+
+<a id="55" class="Keyword">open</a> <a id="60" class="Keyword">import</a> <a id="67" href="Prelude.html" class="Module">Prelude</a>
+<a id="75" class="Keyword">open</a> <a id="80" class="Keyword">import</a> <a id="87" href="Exp.html" class="Module">Exp</a>
+<a id="91" class="Keyword">open</a> <a id="96" class="Keyword">import</a> <a id="103" href="Term.html" class="Module">Term</a>
+<a id="108" class="Keyword">open</a> <a id="113" class="Keyword">import</a> <a id="120" href="Check.html" class="Module">Check</a>
+
+<a id="127" class="Keyword">private</a>
+  <a id="137" class="Keyword">variable</a>
+    <a id="150" href="Test.Check.html#150" class="Generalizable">a</a> <a id="152" href="Test.Check.html#152" class="Generalizable">b</a> <a id="154" class="Symbol">:</a> <a id="156" href="Exp.html#142" class="Datatype">Ty</a>
+    <a id="163" href="Test.Check.html#163" class="Generalizable">Γ</a> <a id="165" class="Symbol">:</a> <a id="167" href="Term.html#190" class="Function">Context</a>
+
+<a id="176" class="Keyword">open</a> <a id="181" class="Keyword">import</a> <a id="188" href="Lexer.html" class="Module">Lexer</a>
+<a id="194" class="Keyword">open</a> <a id="199" class="Keyword">import</a> <a id="206" href="Parser.html" class="Module">Parser</a>
+
+<a id="`a"></a><a id="214" href="Test.Check.html#214" class="Function">`a</a> <a id="217" class="Symbol">:</a> <a id="219" href="Exp.html#142" class="Datatype">Ty</a>
+<a id="222" href="Test.Check.html#214" class="Function">`a</a> <a id="225" class="Symbol">=</a> <a id="227" href="Exp.html#160" class="InductiveConstructor Operator">`</a> <a id="229" class="String">&quot;a&quot;</a>
+
+<a id="`b"></a><a id="234" href="Test.Check.html#234" class="Function">`b</a> <a id="237" class="Symbol">:</a> <a id="239" href="Exp.html#142" class="Datatype">Ty</a>
+<a id="242" href="Test.Check.html#234" class="Function">`b</a> <a id="245" class="Symbol">=</a> <a id="247" href="Exp.html#160" class="InductiveConstructor Operator">`</a> <a id="249" class="String">&quot;b&quot;</a>
+
+<a id="K-term"></a><a id="254" href="Test.Check.html#254" class="Function">K-term</a> <a id="261" class="Symbol">:</a> <a id="263" href="Check.html#1430" class="Datatype">Check</a> <a id="269" class="InductiveConstructor">[]</a> <a id="272" class="Symbol">(</a><a id="273" href="Test.Check.html#214" class="Function">`a</a> <a id="276" href="Exp.html#187" class="InductiveConstructor Operator">⇒</a> <a id="278" class="Symbol">(</a><a id="279" href="Test.Check.html#234" class="Function">`b</a> <a id="282" href="Exp.html#187" class="InductiveConstructor Operator">⇒</a> <a id="284" href="Test.Check.html#214" class="Function">`a</a><a id="286" class="Symbol">))</a>
+<a id="289" href="Test.Check.html#254" class="Function">K-term</a> <a id="296" class="Symbol">=</a> <a id="298" href="Check.html#2617" class="Function">check</a> <a id="304" href="Check.html#487" class="InductiveConstructor">empty</a> <a id="310" class="Symbol">(</a><a id="311" href="Exp.html#518" class="InductiveConstructor">abs</a> <a id="315" class="Symbol">(</a><a id="316" href="Exp.html#313" class="InductiveConstructor">uBind</a> <a id="322" class="String">&quot;x&quot;</a><a id="325" class="Symbol">)</a> <a id="327" class="Symbol">(</a><a id="328" href="Exp.html#518" class="InductiveConstructor">abs</a> <a id="332" class="Symbol">(</a><a id="333" href="Exp.html#313" class="InductiveConstructor">uBind</a> <a id="339" class="String">&quot;y&quot;</a><a id="342" class="Symbol">)</a> <a id="344" class="Symbol">(</a><a id="345" href="Exp.html#464" class="InductiveConstructor">Exp.var</a> <a id="353" class="String">&quot;x&quot;</a><a id="356" class="Symbol">)))</a> <a id="360" class="Symbol">_</a>
+  <a id="364" class="Comment">-- checked (abs (abs (Term.var (suc zero))))</a>
+
+<a id="410" class="Keyword">open</a> <a id="415" class="Keyword">import</a> <a id="422" href="NatSignature.html" class="Module">NatSignature</a>
+
+<a id="zero-term"></a><a id="436" href="Test.Check.html#436" class="Function">zero-term</a> <a id="446" class="Symbol">:</a> <a id="448" href="Check.html#1176" class="Datatype">Infer</a> <a id="454" href="NatSignature.html#301" class="Function">Γℕ</a>
+<a id="457" href="Test.Check.html#436" class="Function">zero-term</a> <a id="467" class="Symbol">=</a> <a id="469" href="Check.html#1629" class="Function">infer</a> <a id="475" href="NatSignature.html#335" class="Function">scopeℕ</a> <a id="482" href="Parser.html#5519" class="Function">zero-exp</a>
+
+<a id="492" class="Comment">-- Error is &quot;zero&quot;</a>
+
+<a id="error-term"></a><a id="512" href="Test.Check.html#512" class="Function">error-term</a> <a id="523" class="Symbol">:</a> <a id="525" href="Term.html#507" class="Datatype">Term</a> <a id="530" href="NatSignature.html#301" class="Function">Γℕ</a> <a id="533" href="NatSignature.html#213" class="InductiveConstructor">tℕ</a>
+<a id="536" href="Test.Check.html#512" class="Function">error-term</a> <a id="547" class="Symbol">=</a> <a id="549" href="Term.html#545" class="InductiveConstructor">Term.var</a> <a id="558" class="Symbol">(</a><a id="559" href="Term.html#404" class="InductiveConstructor">suc</a> <a id="563" href="Term.html#383" class="InductiveConstructor">zero</a><a id="567" class="Symbol">)</a>
+
+<a id="infer!"></a><a id="570" href="Test.Check.html#570" class="Function">infer!</a> <a id="577" class="Symbol">:</a> <a id="579" href="Exp.html#445" class="Datatype">Exp</a> <a id="583" class="Symbol">→</a> <a id="585" href="Data.Product.Base.html#852" class="Function">∃</a> <a id="587" class="Symbol">λ</a> <a id="589" href="Test.Check.html#589" class="Bound">a</a> <a id="591" class="Symbol">→</a> <a id="593" href="Term.html#507" class="Datatype">Term</a> <a id="598" href="NatSignature.html#301" class="Function">Γℕ</a> <a id="601" href="Test.Check.html#589" class="Bound">a</a>
+<a id="603" href="Test.Check.html#570" class="Function">infer!</a> <a id="610" href="Test.Check.html#610" class="Bound">e</a> <a id="612" class="Symbol">=</a> <a id="614" href="Function.Base.html#4061" class="Function Operator">case</a> <a id="619" href="Check.html#1629" class="Function">infer</a> <a id="625" href="NatSignature.html#335" class="Function">scopeℕ</a> <a id="632" href="Test.Check.html#610" class="Bound">e</a> <a id="634" href="Function.Base.html#4061" class="Function Operator">of</a> <a id="637" class="Symbol">λ</a> <a id="639" class="Keyword">where</a>
+  <a id="647" class="Symbol">(</a><a id="648" href="Check.html#1210" class="InductiveConstructor">inferred</a> <a id="657" href="Test.Check.html#657" class="Bound">a</a> <a id="659" href="Test.Check.html#659" class="Bound">t</a><a id="660" class="Symbol">)</a> <a id="662" class="Symbol">→</a> <a id="664" href="Test.Check.html#657" class="Bound">a</a> <a id="666" href="Agda.Builtin.Sigma.html#235" class="InductiveConstructor Operator">,</a> <a id="668" href="Test.Check.html#659" class="Bound">t</a>
+  <a id="672" class="CatchallClause Symbol">_</a> <a id="674" class="Symbol">→</a> <a id="676" class="Symbol">_</a> <a id="678" href="Agda.Builtin.Sigma.html#235" class="InductiveConstructor Operator">,</a> <a id="680" href="Test.Check.html#512" class="Function">error-term</a>
+
+<a id="add-term"></a><a id="692" href="Test.Check.html#692" class="Function">add-term</a> <a id="701" class="Symbol">:</a> <a id="703" class="Symbol">_</a>
+<a id="705" href="Test.Check.html#692" class="Function">add-term</a> <a id="714" class="Symbol">=</a> <a id="716" href="Test.Check.html#570" class="Function">infer!</a> <a id="723" href="Parser.html#5565" class="Function">add-exp</a>
+
+<a id="732" class="Keyword">open</a> <a id="737" class="Keyword">import</a> <a id="744" href="ChurchNumerals.html" class="Module">ChurchNumerals</a>
+
+<a id="inf"></a><a id="760" href="Test.Check.html#760" class="Function">inf</a> <a id="764" class="Symbol">=</a> <a id="766" href="Test.Check.html#570" class="Function">infer!</a> <a id="773" href="Function.Base.html#1134" class="Function Operator">∘</a> <a id="775" href="Parser.html#4560" class="Function">parse!</a> <a id="782" href="Function.Base.html#1134" class="Function Operator">∘</a> <a id="784" href="Lexer.html#3147" class="Function">lex</a>
+
+<a id="num-term"></a><a id="789" href="Test.Check.html#789" class="Function">num-term</a> <a id="798" class="Symbol">:</a> <a id="800" href="Agda.Builtin.Nat.html#203" class="Datatype">ℕ</a> <a id="802" class="Symbol">→</a> <a id="804" class="Symbol">_</a>
+<a id="806" href="Test.Check.html#789" class="Function">num-term</a> <a id="815" class="Symbol">=</a> <a id="817" href="Test.Check.html#760" class="Function">inf</a> <a id="821" href="Function.Base.html#1134" class="Function Operator">∘</a> <a id="823" href="ChurchNumerals.html#1047" class="Function">num</a>
+
+<a id="4+2-term"></a><a id="828" href="Test.Check.html#828" class="Function">4+2-term</a> <a id="837" class="Symbol">:</a> <a id="839" class="Symbol">_</a>
+<a id="841" href="Test.Check.html#828" class="Function">4+2-term</a> <a id="850" class="Symbol">=</a> <a id="852" href="Test.Check.html#760" class="Function">inf</a> <a id="856" href="ChurchNumerals.html#1446" class="Function">s4+2</a>
+
+<a id="862" class="Comment">-- -}</a>
+<a id="868" class="Comment">-- -}</a>
+</pre></body></html>

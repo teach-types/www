@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Lecture10</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Keyword">module</a> <a id="8" href="Lecture10.html" class="Module">Lecture10</a> <a id="18" class="Keyword">where</a>
+
+<a id="25" class="Keyword">import</a> <a id="32" href="Prelude.html" class="Module">Prelude</a>
+
+<a id="41" class="Keyword">import</a> <a id="48" href="Exp.html" class="Module">Exp</a>              <a id="65" class="Comment">-- STLC terms in spine form</a>
+<a id="93" class="Keyword">import</a> <a id="100" href="Term.html" class="Module">Term</a>             <a id="117" class="Comment">-- Typed STLC terms</a>
+<a id="137" class="Keyword">import</a> <a id="144" href="Check.html" class="Module">Check</a>            <a id="161" class="Comment">-- Type checker</a>
+
+<a id="178" class="Keyword">import</a> <a id="185" href="Lexer.html" class="Module">Lexer</a>            <a id="202" class="Comment">-- Tokens and lexical analysis</a>
+<a id="233" class="Keyword">import</a> <a id="240" href="Parser.html" class="Module">Parser</a>           <a id="257" class="Comment">-- Parsing STLC terms</a>
+<a id="279" class="Keyword">import</a> <a id="286" href="Parser.Monad.html" class="Module">Parser.Monad</a>     <a id="303" class="Comment">-- General parsing tools</a>
+
+<a id="329" class="Keyword">import</a> <a id="336" href="NatSignature.html" class="Module">NatSignature</a>     <a id="353" class="Comment">-- Constants for natural numbers</a>
+<a id="386" class="Keyword">import</a> <a id="393" href="ChurchNumerals.html" class="Module">ChurchNumerals</a>   <a id="410" class="Comment">-- Encoding numbers as lambda-terms</a>
+
+<a id="447" class="Keyword">import</a> <a id="454" href="Test.Check.html" class="Module">Test.Check</a>       <a id="471" class="Comment">-- Testing the type checker</a>
+
+<a id="500" class="Comment">-- Command-line program</a>
+
+<a id="525" class="Keyword">import</a> <a id="532" href="Prelude.IO.html" class="Module">Prelude.IO</a>
+<a id="543" class="Keyword">import</a> <a id="550" href="stlc.html" class="Module">stlc</a>
+
+<a id="556" class="Comment">-- Weakening</a>
+
+<a id="570" class="Keyword">import</a> <a id="577" href="Term.Weakening.html" class="Module">Term.Weakening</a>
+<a id="592" class="Keyword">import</a> <a id="599" href="Term.Weakening.Properties.html" class="Module">Term.Weakening.Properties</a>
+<a id="625" class="Keyword">import</a> <a id="632" href="Term.Weakening.Properties.Id.html" class="Module">Term.Weakening.Properties.Id</a>
+
+<a id="662" class="Comment">-- Substitution</a>
+
+<a id="679" class="Keyword">import</a> <a id="686" href="Term.Substitution.html" class="Module">Term.Substitution</a>
+<a id="704" class="Keyword">import</a> <a id="711" href="Term.Substitution.Properties.html" class="Module">Term.Substitution.Properties</a>
+
+<a id="741" class="Comment">-- Definitional equality</a>
+
+<a id="767" class="Keyword">import</a> <a id="774" href="Term.Equality.html" class="Module">Term.Equality</a>
+
+<a id="789" class="Comment">-- Normalization</a>
+
+<a id="807" class="Keyword">import</a> <a id="814" href="Term.Normalization.EtaLong.html" class="Module">Term.Normalization.EtaLong</a>
+</pre></body></html>

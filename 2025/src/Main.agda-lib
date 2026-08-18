@@ -1,0 +1,4 @@
+include:
+  .
+  stlc
+depend: standard-library

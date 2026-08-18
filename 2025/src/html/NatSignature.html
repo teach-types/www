@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>NatSignature</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Comment">-- Free variables &quot;zero : ℕ&quot; and &quot;suc : ℕ → ℕ&quot;</a>
+
+<a id="49" class="Keyword">module</a> <a id="56" href="NatSignature.html" class="Module">NatSignature</a> <a id="69" class="Keyword">where</a>
+
+<a id="76" class="Keyword">open</a> <a id="81" class="Keyword">import</a> <a id="88" href="Prelude.html" class="Module">Prelude</a>
+<a id="96" class="Keyword">open</a> <a id="101" class="Keyword">import</a> <a id="108" href="Term.html" class="Module">Term</a>
+<a id="113" class="Keyword">open</a> <a id="118" class="Keyword">import</a> <a id="125" href="Check.html" class="Module">Check</a> <a id="131" class="Keyword">using</a> <a id="137" class="Symbol">(</a><a id="138" href="Check.html#484" class="Datatype">Scope</a><a id="143" class="Symbol">;</a> <a id="145" href="Check.html#514" class="InductiveConstructor">empty</a><a id="150" class="Symbol">;</a> <a id="152" href="Check.html#533" class="InductiveConstructor">cons</a><a id="156" class="Symbol">)</a>
+<a id="158" class="Keyword">import</a> <a id="165" href="Eval.html" class="Module">Eval</a>
+
+<a id="171" class="Comment">-- Signature for natural numbers</a>
+
+<a id="205" class="Keyword">pattern</a> <a id="tℕ"></a><a id="213" href="NatSignature.html#213" class="InductiveConstructor">tℕ</a> <a id="216" class="Symbol">=</a> <a id="218" href="Exp.html#187" class="InductiveConstructor Operator">`</a> <a id="220" class="String">&quot;ℕ&quot;</a>
+<a id="224" class="Keyword">pattern</a> <a id="tℕ⇒ℕ"></a><a id="232" href="NatSignature.html#232" class="InductiveConstructor">tℕ⇒ℕ</a> <a id="237" class="Symbol">=</a> <a id="239" href="NatSignature.html#213" class="InductiveConstructor">tℕ</a> <a id="242" href="Exp.html#214" class="InductiveConstructor Operator">⇒</a> <a id="244" href="NatSignature.html#213" class="InductiveConstructor">tℕ</a>
+<a id="247" class="Keyword">pattern</a> <a id="Chℕ"></a><a id="255" href="NatSignature.html#255" class="InductiveConstructor">Chℕ</a>  <a id="260" class="Symbol">=</a> <a id="262" href="NatSignature.html#232" class="InductiveConstructor">tℕ⇒ℕ</a> <a id="267" href="Exp.html#214" class="InductiveConstructor Operator">⇒</a> <a id="269" href="NatSignature.html#232" class="InductiveConstructor">tℕ⇒ℕ</a>
+
+<a id="275" class="Comment">-- Context and scope for &quot;zero : ℕ, suc : ℕ → ℕ&quot;</a>
+
+<a id="Γℕ"></a><a id="325" href="NatSignature.html#325" class="Function">Γℕ</a> <a id="328" class="Symbol">:</a> <a id="330" href="Term.html#171" class="Function">Context</a>
+<a id="338" href="NatSignature.html#325" class="Function">Γℕ</a> <a id="341" class="Symbol">=</a> <a id="343" href="NatSignature.html#232" class="InductiveConstructor">tℕ⇒ℕ</a> <a id="348" href="Agda.Builtin.List.html#199" class="InductiveConstructor Operator">∷</a> <a id="350" href="NatSignature.html#213" class="InductiveConstructor">tℕ</a> <a id="353" href="Agda.Builtin.List.html#199" class="InductiveConstructor Operator">∷</a> <a id="355" href="Agda.Builtin.List.html#184" class="InductiveConstructor">[]</a>
+
+<a id="scopeℕ"></a><a id="359" href="NatSignature.html#359" class="Function">scopeℕ</a> <a id="366" class="Symbol">:</a> <a id="368" href="Check.html#484" class="Datatype">Scope</a> <a id="374" href="NatSignature.html#325" class="Function">Γℕ</a>
+<a id="377" href="NatSignature.html#359" class="Function">scopeℕ</a> <a id="384" class="Symbol">=</a> <a id="386" href="Check.html#533" class="InductiveConstructor">cons</a> <a id="391" class="String">&quot;suc&quot;</a> <a id="397" href="NatSignature.html#232" class="InductiveConstructor">tℕ⇒ℕ</a> <a id="402" class="Symbol">(</a><a id="403" href="Check.html#533" class="InductiveConstructor">cons</a> <a id="408" class="String">&quot;zero&quot;</a> <a id="415" href="NatSignature.html#213" class="InductiveConstructor">tℕ</a> <a id="418" href="Check.html#514" class="InductiveConstructor">empty</a><a id="423" class="Symbol">)</a>
+
+<a id="426" class="Comment">-- Evaluation of natural number terms</a>
+
+<a id="465" class="Comment">-- For simplicity, all base types are interpreted as ℕ</a>
+
+<a id="ξℕ"></a><a id="521" href="NatSignature.html#521" class="Function">ξℕ</a> <a id="524" class="Symbol">:</a> <a id="526" href="Exp.html#147" class="Function">BaseTy</a> <a id="533" class="Symbol">→</a> <a id="535" href="Agda.Primitive.html#388" class="Primitive">Set</a>
+<a id="539" href="NatSignature.html#521" class="Function">ξℕ</a> <a id="542" class="Symbol">_</a> <a id="544" class="Symbol">=</a> <a id="546" href="Data.Nat.Base.html#1062" class="Datatype">ℕ</a>
+
+<a id="549" class="Keyword">open</a> <a id="554" href="Eval.html#114" class="Module">Eval.Den</a> <a id="563" href="NatSignature.html#521" class="Function">ξℕ</a> <a id="566" class="Keyword">using</a> <a id="572" class="Symbol">(</a><a id="573" href="Eval.html#229" class="Datatype">Env</a><a id="576" class="Symbol">;</a> <a id="578" href="Eval.html#259" class="InductiveConstructor">[]</a><a id="580" class="Symbol">;</a> <a id="582" href="Eval.html#276" class="InductiveConstructor Operator">_∷_</a><a id="585" class="Symbol">;</a> <a id="587" href="Eval.html#425" class="Function">eval</a><a id="591" class="Symbol">)</a>
+
+<a id="594" class="Comment">-- The free variables &quot;zero&quot; and &quot;suc&quot; are interpreted as the respective constructors of the natural numbers.</a>
+
+<a id="ρℕ"></a><a id="705" href="NatSignature.html#705" class="Function">ρℕ</a> <a id="708" class="Symbol">:</a> <a id="710" href="Eval.html#229" class="Datatype">Env</a> <a id="714" href="NatSignature.html#325" class="Function">Γℕ</a>
+<a id="717" href="NatSignature.html#705" class="Function">ρℕ</a> <a id="720" class="Symbol">=</a> <a id="722" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a> <a id="726" href="Eval.html#276" class="InductiveConstructor Operator">∷</a> <a id="728" href="Agda.Builtin.Nat.html#221" class="InductiveConstructor">zero</a> <a id="733" href="Eval.html#276" class="InductiveConstructor Operator">∷</a> <a id="735" href="Eval.html#259" class="InductiveConstructor">[]</a>
+
+<a id="739" class="Comment">-- Evaluating a term of type ℕ with free variables &quot;zero&quot; and &quot;suc&quot;.</a>
+
+<a id="evalℕ"></a><a id="809" href="NatSignature.html#809" class="Function">evalℕ</a> <a id="815" class="Symbol">:</a> <a id="817" href="Term.html#488" class="Datatype">Term</a> <a id="822" href="NatSignature.html#325" class="Function">Γℕ</a> <a id="825" href="NatSignature.html#213" class="InductiveConstructor">tℕ</a> <a id="828" class="Symbol">→</a> <a id="830" href="Data.Nat.Base.html#1062" class="Datatype">ℕ</a>
+<a id="832" href="NatSignature.html#809" class="Function">evalℕ</a> <a id="838" class="Symbol">=</a> <a id="840" href="Eval.html#425" class="Function">eval</a> <a id="845" href="NatSignature.html#705" class="Function">ρℕ</a>
+</pre></body></html>

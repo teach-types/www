@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Prelude.Pretty</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Comment">-- Mini pretty printing library</a>
+
+<a id="34" class="Keyword">module</a> <a id="41" href="Prelude.Pretty.html" class="Module">Prelude.Pretty</a> <a id="56" class="Keyword">where</a>
+
+<a id="63" class="Keyword">open</a> <a id="68" class="Keyword">import</a> <a id="75" href="Prelude.html" class="Module">Prelude</a>
+<a id="83" class="Keyword">open</a> <a id="88" href="Prelude.html#1161" class="Module">String</a> <a id="95" class="Keyword">public</a> <a id="102" class="Keyword">using</a> <a id="108" class="Symbol">()</a> <a id="111" class="Keyword">renaming</a> <a id="120" class="Symbol">(</a><a id="121" href="Data.String.Base.html#2425" class="Function Operator">_++_</a> <a id="126" class="Symbol">to</a> <a id="129" class="Keyword">infixr</a> <a id="136" class="Number">6</a> <a id="138" class="Function Operator">_&lt;&gt;_</a><a id="142" class="Symbol">)</a>
+
+<a id="145" class="Keyword">infixr</a> <a id="152" class="Number">6</a> <a id="154" href="Prelude.Pretty.html#161" class="Function Operator">_&lt;+&gt;_</a>
+
+<a id="_&lt;+&gt;_"></a><a id="161" href="Prelude.Pretty.html#161" class="Function Operator">_&lt;+&gt;_</a> <a id="167" class="Symbol">:</a> <a id="169" href="Agda.Builtin.String.html#335" class="Postulate">String</a> <a id="176" class="Symbol">→</a> <a id="178" href="Agda.Builtin.String.html#335" class="Postulate">String</a> <a id="185" class="Symbol">→</a> <a id="187" href="Agda.Builtin.String.html#335" class="Postulate">String</a>
+<a id="194" href="Prelude.Pretty.html#194" class="Bound">s</a> <a id="196" href="Prelude.Pretty.html#161" class="Function Operator">&lt;+&gt;</a> <a id="200" href="Prelude.Pretty.html#200" class="Bound">t</a> <a id="202" class="Symbol">=</a> <a id="204" href="Prelude.Pretty.html#194" class="Bound">s</a> <a id="206" href="Prelude.Pretty.html#138" class="Function Operator">&lt;&gt;</a> <a id="209" class="String">&quot; &quot;</a> <a id="213" href="Prelude.Pretty.html#138" class="Function Operator">&lt;&gt;</a> <a id="216" href="Prelude.Pretty.html#200" class="Bound">t</a>
+
+<a id="parens"></a><a id="219" href="Prelude.Pretty.html#219" class="Function">parens</a> <a id="226" class="Symbol">:</a> <a id="228" href="Agda.Builtin.String.html#335" class="Postulate">String</a> <a id="235" class="Symbol">→</a> <a id="237" href="Agda.Builtin.String.html#335" class="Postulate">String</a>
+<a id="244" href="Prelude.Pretty.html#219" class="Function">parens</a> <a id="251" href="Prelude.Pretty.html#251" class="Bound">s</a> <a id="253" class="Symbol">=</a> <a id="255" class="String">&quot;(&quot;</a> <a id="259" href="Prelude.Pretty.html#138" class="Function Operator">&lt;&gt;</a> <a id="262" href="Prelude.Pretty.html#251" class="Bound">s</a> <a id="264" href="Prelude.Pretty.html#138" class="Function Operator">&lt;&gt;</a> <a id="267" class="String">&quot;)&quot;</a>
+</pre></body></html>

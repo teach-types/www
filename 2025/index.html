@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <!-- All relative links will now start from one directory up -->
+  <base href="../">
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Types for Programs and Proofs</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="pandoc.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Types for Programs and Proofs</h1>
+<p class="subtitle">DAT350 (Chalmers) / DIT235 (GU)</p>
+<p class="date">Fall Term 2025 (LP1)</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#schedule" id="toc-schedule">Schedule</a></li>
+<li><a href="#literature" id="toc-literature">Literature</a></li>
+<li><a href="#lectures" id="toc-lectures">Lectures</a></li>
+<li><a href="#software" id="toc-software">Software</a></li>
+</ul>
+</nav>
+<p><link rel="stylesheet" href="gh-fork-ribbon.css" />
+<style>.github-fork-ribbon:before { background-color: #333; }</style>
+<a class="github-fork-ribbon" href="https://github.com/teach-types/www" data-ribbon="Sources on GitHub" title="Sources on GitHub">Sources
+on GitHub</a></p>
+<figure id="id">
+<img src="agda.svg" class="class" width="480" alt="Agda logo" />
+<figcaption aria-hidden="true">Agda logo</figcaption>
+</figure>
+<p>Most course information is on <a
+href="https://chalmers.instructure.com/courses/35737">Canvas</a>.</p>
+<p>Further course links:<br />
+<a
+href="https://cloud.timeedit.net/chalmers/web/public/riq30Qy6565ZZ5Q59g7650Z56YZ6019X67oY40QQ06o0gQ176qQY.html">Schedule
+on TimeEdit</a> / <a
+href="https://www.student.chalmers.se/sp/course?course_id=40833">Chalmers
+studieportal</a> / <a
+href="https://www.gu.se/studera/hitta-utbildning/typer-for-program-och-bevis-dit235">GU
+ad (sv)</a> / <a href="http://kursplaner.gu.se/pdf/kurs/sv/DIT235">GU
+kursplan</a> / <a href="http://kursplaner.gu.se/pdf/kurs/en/DIT235">GU
+course description</a> / <a
+href="https://www.cse.chalmers.se/~coquand/TYPES2.html">Old course
+page</a></p>
+<h1 id="schedule">Schedule</h1>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 6%" />
+<col style="width: 1%" />
+<col style="width: 48%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr>
+<th>Date</th>
+<th>Time</th>
+<th>Teacher</th>
+<th>Title</th>
+<th>Reading / Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thu 04/09</td>
+<td>10-12</td>
+<td>AA</td>
+<td>01 <a href="#lecture-1">Introduction to Agda</a></td>
+<td>LN 1 - 3; VFP 1, 3; DTW 1, 2.1 - 2.5</td>
+</tr>
+<tr>
+<td>Mon 08/09</td>
+<td>13-15</td>
+<td>TC</td>
+<td>02 <a href="#lecture-2">Dependent types</a></td>
+<td></td>
+</tr>
+<tr>
+<td><em>Mon 08/09</em></td>
+<td><em>15-17</em></td>
+<td>AA</td>
+<td><a href="#exercise-1">Getting started with Agda</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Thu 11/09</td>
+<td>10-12</td>
+<td>TC</td>
+<td>03 <a href="#lecture-3">Proving in Agda</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon 15/09</td>
+<td>13-15</td>
+<td>TC</td>
+<td>04 <a href="#lecture-4">Introduction to operational semantics and
+type systems</a></td>
+<td>TPL 1-3</td>
+</tr>
+<tr>
+<td><em>Mon 15/09</em></td>
+<td><em>15-17</em></td>
+<td>TC</td>
+<td><a href="#exercise-2">More on Agda</a></td>
+<td><em>Homework 1 due</em></td>
+</tr>
+<tr>
+<td>Thu 18/09</td>
+<td>10-12</td>
+<td>TC</td>
+<td>05 <a href="#lecture-5">Introduction to operational semantics and
+type systems</a></td>
+<td>TPL 3-4</td>
+</tr>
+<tr>
+<td>Mon 22/09</td>
+<td>13-15</td>
+<td>TC</td>
+<td>06 <a href="#lecture-6">Introduction to operational semantics and
+type systems</a></td>
+<td>TPL 5-10</td>
+</tr>
+<tr>
+<td><em>Mon 22/09</em></td>
+<td><em>15-17</em></td>
+<td>TC</td>
+<td><a href="#exercise-3">More on Agda</a></td>
+<td><em>Homework 2 due</em></td>
+</tr>
+<tr>
+<td>Thu 25/09</td>
+<td>10-12</td>
+<td>TC</td>
+<td>07 <a href="#lecture-7">Introduction to operational semantics and
+type systems</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon 29/09</td>
+<td>13-15</td>
+<td>AA</td>
+<td>08 <a href="#lecture-8">Bidirectional type-checking</a></td>
+<td></td>
+</tr>
+<tr>
+<td><em>Mon 29/09</em></td>
+<td><em>15-17</em></td>
+<td>AA</td>
+<td><a href="#exercise-4">More on Agda</a></td>
+<td><em>Homework 3 due</em></td>
+</tr>
+<tr>
+<td>Thu 02/10</td>
+<td>10-12</td>
+<td>AA</td>
+<td>09 <a href="#lecture-9">More on operational semantics and type
+systems in Agda</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon 06/10</td>
+<td>13-15</td>
+<td>AA</td>
+<td>10 <a href="#lecture-10">More on operational semantics and type
+systems in Agda</a></td>
+<td></td>
+</tr>
+<tr>
+<td><em>Mon 06/10</em></td>
+<td><em>15-17</em></td>
+<td>AA</td>
+<td><a href="#exercise-5">Exercises on operational semantics and type
+systems in Agda</a></td>
+<td><em>Homework 4 due</em></td>
+</tr>
+<tr>
+<td>Thu 09/10</td>
+<td>10-12</td>
+<td>AA</td>
+<td>11 <a href="#lecture-11">More on operational semantics and type
+systems in Agda</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon 13/10</td>
+<td>13-15</td>
+<td>TC</td>
+<td>Student presentations</td>
+<td></td>
+</tr>
+<tr>
+<td>Mon 13/10</td>
+<td>15-17</td>
+<td>TC</td>
+<td>Student presentations</td>
+<td></td>
+</tr>
+<tr>
+<td>Thu 16/10</td>
+<td>10-12</td>
+<td>TC</td>
+<td>Student presentations</td>
+<td></td>
+</tr>
+<tr>
+<td>Mon 20/10</td>
+<td>13-15</td>
+<td>TC</td>
+<td>Student presentations</td>
+<td></td>
+</tr>
+<tr>
+<td>Mon 20/10</td>
+<td>15-17</td>
+<td>TC</td>
+<td>Student presentations</td>
+<td></td>
+</tr>
+<tr>
+<td>Tue 21/10</td>
+<td>08-</td>
+<td></td>
+<td>Take home exam</td>
+<td><em>Deadline: Fri 24/10 18:00</em></td>
+</tr>
+</tbody>
+</table>
+<p>Teachers: TC = <a href="http://www.cse.chalmers.se/~coquand/">Thierry
+Coquand</a>, AA = <a href="http://www.cse.chalmers.se/~abela/">Andreas
+Abel</a>.<br />
+Room: Lecture hall <a
+href="https://maps.chalmers.se/#4746a62f-a989-4e43-8ba1-cc624c0685a2">MC</a>.</p>
+<h1 id="literature">Literature</h1>
+<p>Further literature and online access to books via the library can be
+found on <a
+href="https://chalmers.instructure.com/courses/35737/assignments/syllabus">Canvas</a>.</p>
+<ul>
+<li>LN = <a
+href="http://www.cse.chalmers.se/~peterd/papers/AgdaLectureNotes2018.pdf">An
+Introduction to Programming and Proving in Agda</a> (draft), lecture
+notes</li>
+<li>DTW = <a
+href="http://www.cse.chalmers.se/~peterd/papers/DependentTypesAtWork.pdf">Dependent
+Types at Work</a></li>
+<li>VFP = <a href="http://dl.acm.org/citation.cfm?id=2841316">Verified
+Functional Programming in Agda</a></li>
+<li>TPL = <a
+href="http://www.cis.upenn.edu/~bcpierce/tapl/index.html">Types and
+Programming Languages</a></li>
+</ul>
+<h1 id="lectures">Lectures</h1>
+<h2 id="lecture-1">Lecture 1</h2>
+<ul>
+<li>Introduction to Agda</li>
+<li>Simply-typed programming in Agda</li>
+</ul>
+<p>Agda code: <a href="live/Lecture1.agda">live code start</a>, <a
+href="src/Lecture1.agda">solution</a>, <a
+href="src/html/Lecture1.html">rendered</a></p>
+<h2 id="lecture-2">Lecture 2</h2>
+<ul>
+<li>General introduction to logic and dependent types <a
+href="slides/lecture2.pdf">slides</a></li>
+<li>Example of Turing Machines in Agda, how to formulate non
+termination</li>
+</ul>
+<h2 id="exercise-1">Exercise 1</h2>
+<p>Getting started with Agda.<br />
+Help-session where Andreas will help you get started with Agda
+programming.<br />
+Before this session you need to install Agda and try to write your first
+Agda programs.<br />
+We’ll do some simple exercises in Agda.</p>
+<h2 id="lecture-3">Lecture 3</h2>
+<ul>
+<li>More on Turing machines</li>
+<li>Inductive predicates</li>
+<li>Propositional and predicate logic</li>
+<li>Propositions as Types, Natural Deduction in Agda</li>
+</ul>
+<h2 id="lecture-4">Lecture 4</h2>
+<ul>
+<li>Data types, induction and indexed data types</li>
+<li>Proof by induction on Data Types</li>
+<li>Indexed Data Types: typed expression</li>
+<li>Equality as an Indexed Data Type</li>
+<li>Definitional Equality versus Equality as Type (“book equality”)</li>
+</ul>
+<h2 id="lecture-5">Lecture 5</h2>
+<ul>
+<li>Hilbert and Gentzen calculus in Agda for propositional logic with
+implication</li>
+<li>Show equivalence (deduction theorem)</li>
+<li>Run equivalence as proof transformation</li>
+<li>Untyped arithmetic expressions and operational semantics (small-step
+and big-step)</li>
+<li>Typed predicate on arithmetic expressions</li>
+<li>Progress and preservation theorems</li>
+</ul>
+<h2 id="lecture-6">Lecture 6</h2>
+<ul>
+<li>General results on untyped lambda calculus:<br />
+</li>
+<li>Confluence of reduction</li>
+<li>Equivalence from reduction</li>
+<li>Representation of untyped lambda calculus in Agda</li>
+</ul>
+<h2 id="lecture-7">Lecture 7</h2>
+<ul>
+<li>Correctness of a simple compiler to stack machine with addition</li>
+<li>Krivine machine</li>
+</ul>
+<h2 id="lecture-8">Lecture 8</h2>
+<ul>
+<li>Well-typed lambda-terms</li>
+<li>Denotational semantics for typed lambda-calculus</li>
+<li><a
+href="https://www.haskellforall.com/2022/06/the-appeal-of-bidirectional-type.html">Bidirectional
+type-checker</a></li>
+<li>Evidence-producing type-checker</li>
+</ul>
+<p>Agda code (expressions in spine form, superseded by lecture 9): <a
+href="live/stlc-spine/">live code start</a>, <a
+href="src/stlc-spine/">full</a>, <a
+href="src/stlc-spine/html/Lecture8.html">rendered</a></p>
+<h2 id="lecture-9">Lecture 9</h2>
+<p>Implementation of simply-typed lambda-calculus (STLC), continued.</p>
+<ul>
+<li>the <em>parse, don’t validate</em> principle</li>
+<li>bidirectional checking implemented in Agda</li>
+<li><code>with</code> vs. <code>case ... of \ where</code> vs. local
+functions</li>
+<li>working with equality proofs (<code>subst</code>,
+<code>cong</code>)</li>
+<li>deciding equality</li>
+<li>lexer for the syntax of STLC</li>
+<li>grammar of STLC</li>
+<li>(briefly: parser monad)</li>
+</ul>
+<p>Agda live code: <a href="live/stlc-lec9-start/">start</a>, <a
+href="live/stlc-check/">finish</a>, <a
+href="src/stlc-check/">solution</a>, <a
+href="src/stlc-check/html/Lecture9.html">rendered</a></p>
+<h2 id="lecture-10">Lecture 10</h2>
+<p>Normalization for typed lambda-calculus</p>
+<ul>
+<li>βη-equality</li>
+<li>weakening</li>
+<li>substitution</li>
+<li>η-long β-normal forms</li>
+<li>weak normalization</li>
+<li>reducibility</li>
+</ul>
+<p>Agda live code: <a href="live/stlc/">start</a>, <a
+href="src/stlc/">solution</a>, <a
+href="src/stlc/html/Lecture10.html">rendered</a></p>
+<h2 id="lecture-11">Lecture 11</h2>
+<p>Possible topics:</p>
+<ul>
+<li>Confluence in Agda (Parallel substituion method)</li>
+<li>Machine (KAM) for classical logic (Peirce CC)</li>
+</ul>
+<h1 id="software">Software</h1>
+<p>We recommend Agda version 2.8.0 (recent older versions are also
+ok).</p>
+<h2 id="installing-agda-from-binary">Installing Agda from binary</h2>
+<ol type="1">
+<li>Download a suitable binary package from
+https://github.com/agda/agda/releases/tag/v2.8.0 and put it in your
+PATH</li>
+<li>Run <code>agda --setup</code></li>
+</ol>
+<h2 id="installing-agda-from-source">Installing Agda from source</h2>
+<ol start="0" type="1">
+<li>Install latest Haskell (see below)</li>
+<li>Install Agda from Stackage nightly:
+<code>stack install --resolver=nightly Agda</code></li>
+<li>Run <code>agda --setup</code></li>
+<li>Set up the Agda mode (see below)</li>
+</ol>
+<h2 id="installing-haskell">Installing Haskell</h2>
+<ol type="1">
+<li>Install <a href="https://www.haskell.org/ghcup/">GHCup</a></li>
+<li>Install latest Stack (3.7.1) and GHC (9.12.2) from within
+<code>ghcup tui</code></li>
+<li>Ensure that the path printed by <code>stack path --local-bin</code>
+is in your system PATH</li>
+</ol>
+<h2 id="setting-up-the-agda-mode-emacs">Setting up the Agda mode
+(Emacs)</h2>
+<ol type="1">
+<li>Compile the Emacs lisp files: <code>agda-mode compile</code></li>
+<li>Install the Agda mode: <code>agda-mode setup</code></li>
+</ol>
+<h2 id="setting-up-the-agda-mode-vscode">Setting up the Agda mode
+(VSCode)</h2>
+<p>Get the <code>agda-mode</code> extension (authored by Ting-Gian
+LUA).</p>
+<h2 id="installing-the-agda-standard-library">Installing the Agda
+standard library</h2>
+<p>To install a library for Agda, it must be downloaded and the path to
+its <code>.agda-lib</code> file must be mentioned in the file
+<code>$AGDA_APP_DIR/libraries</code>, where <code>$AGDA_APP_DIR</code>
+is the directory printed by
+<code>agda --print-agda-app-dir</code>.<br />
+(In case this directory does not exist yet, please create it.)</p>
+<p>For instance, to install the Agda standard library, you can follow
+these steps.</p>
+<ol type="1">
+<li><p>Download the version of the standard library for your Agda
+version according to
+https://wiki.portal.chalmers.se/agda/Libraries/StandardLibrary .<br />
+For Agda 2.8.0, this is <a
+href="https://github.com/agda/agda-stdlib/releases/tag/v2.3">version
+2.3</a>.<br />
+</p></li>
+<li><p>Unpack the library into a directory of your choice, for instance
+(on Linux/MacOS):<br />
+<code>~/.agda/libraries.d/standard-library</code></p></li>
+<li><p>Recommended: in this directory rename
+<code>agda-stdlib-2.3</code> to <code>v2.3</code> (or similar).<br />
+</p></li>
+<li><p>Add the following line to your <code>~/.agda/libraries</code>
+file (create it if it does not exist):</p>
+<pre><code>~/.agda/libraries.d/standard-library/v2.3/standard-library.agda-lib</code></pre>
+<p>In this you need to expand <code>~</code> manually to your home
+folder.</p></li>
+</ol>
+<p>On Windows, the <code>libraries</code> file might reside in another
+directory than <code>~/.agda</code>.<br />
+Check the output of <code>agda --print-agda-app-dir</code>.</p>
+</body>
+</html>

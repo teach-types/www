@@ -13,27 +13,39 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
+      AGDA_VERSION: '2.8.0'
+      STDLIB_VERSION: '2.4'
       # BNFC: 2.9.5
-      PANDOC: 3.7.0.2
+      # PANDOC: 3.7.0.2
 
     steps:
 
-    - name: Install agda
-      uses: wenkokke/setup-agda@main
+    # - name: Install agda
+    #   uses: wenkokke/setup-agda@main
+    #   with:
+    #       agda-stdlib-version: 'recommended'
+
+    - name: Install Agda ${{ env.AGDA_VERSION }}
+      id: setup-agda
+      uses: agda/agda-setup-action@v1
       with:
-          agda-stdlib-version: 'recommended'
+        agda-version: ${{ env.AGDA_VERSION }}
+        agda-stdlib-version: ${{ env.STDLIB_VERSION }}
 
-    - name: Install pandoc
-      run: |
-        wget "https://github.com/jgm/pandoc/releases/download/${PANDOC}/pandoc-${PANDOC}-1-amd64.deb"
-        sudo dpkg -i "pandoc-${PANDOC}-1-amd64.deb"
-    # The ubuntu-shipped pandoc is too old to support e.g. 'title: ...' in md->html
+    - name: Install Pandoc
+      uses: pandoc/actions/setup@v1
+
+    # - name: Install pandoc
     #   run: |
-    #     sudo apt install pandoc
+    #     wget "https://github.com/jgm/pandoc/releases/download/${PANDOC}/pandoc-${PANDOC}-1-amd64.deb"
+    #     sudo dpkg -i "pandoc-${PANDOC}-1-amd64.deb"
+    # # The ubuntu-shipped pandoc is too old to support e.g. 'title: ...' in md->html
+    # #   run: |
+    # #     sudo apt install pandoc
 
-    - name: Pandoc version
-      run: |
-        pandoc --version
+    # - name: Pandoc version
+    #   run: |
+    #     pandoc --version
 
     # - name: Local PATH
     #   run: |
@@ -59,7 +71,7 @@ jobs:
     #     mv bnfc-${{ env.BNFC }}-linux.binary "${HOME}/.local/bin/bnfc"
     #     chmod +x "${HOME}/.local/bin/bnfc"
 
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v7
 
     - name: Build pages
       run: |
@@ -69,7 +81,7 @@ jobs:
     #   uses: actions/configure-pages@v3
     #   # Needed? https://github.com/actions/starter-workflows/issues/1996
 
-    - uses: actions/upload-pages-artifact@v4
+    - uses: actions/upload-pages-artifact@v5
       with:
         path: .
 
@@ -99,4 +111,4 @@ jobs:
 
     - name: Deploy to GitHub Pages
       id:   deployment
-      uses: actions/deploy-pages@v4
+      uses: actions/deploy-pages@v5

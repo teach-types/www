@@ -272,3 +272,27 @@ bb4-halts = refl
 
 forever-runs : fst runForever ≡ qA
 forever-runs = refl
+
+--------------------------------------------------------------------------------
+-- Follow-up exercises on this file:
+--
+-- 1. Prove that neverStop is logically equivalent to the negation of willStop.
+--    What about the opposite direction: Is willStop the negation of neverStop?
+--
+-- 2. Refactor the code so that State does not contain qHalt,
+--    but instead the Transition function is partial,
+--
+--       State → Symbol → Maybe (State × Symbol × Dir)
+--
+--    with the standard definition of Maybe:
+--
+--       data Maybe (A : Set) : Set where
+--         nothing : Maybe A
+--         just    : A → Maybe A
+--
+--    This refactoring may force you to adapt many of the definitions.
+--
+--    Try to make a judgement:
+--    Is the refactored code more clear or the original one?
+--
+--------------------------------------------------------------------------------

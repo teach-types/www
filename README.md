@@ -197,8 +197,10 @@ Installing Haskell
 ------------------
 
 1. Install [GHCup](https://www.haskell.org/ghcup/)
-2. Install latest Stack (3.7.1) and GHC (9.12.2) from within `ghcup tui`
+2. Install Stack (3.11.1) and GHC (9.12.4) from within `ghcup tui`
 3. Ensure that the path printed by `stack path --local-bin` is in your system PATH
+
+Note: if you use GHC 9.14.1 to build Agda, you need Agda 2.8.0.1 rather than 2.8.0.
 
 Setting up the Agda mode (Emacs)
 --------------------------------
@@ -220,13 +222,13 @@ To install a library for Agda, it must be downloaded and the path to its `.agda-
 For instance, to install the Agda standard library, you can follow these steps.
 
 1. Download the version of the standard library for your Agda version according to https://wiki.portal.chalmers.se/agda/Libraries/StandardLibrary .
-   For Agda 2.8.0, this is [version 2.3](https://github.com/agda/agda-stdlib/releases/tag/v2.3).
+   For Agda 2.8.0, this is [version 2.4](https://github.com/agda/agda-stdlib/releases/tag/v2.4).
 2. Unpack the library into a directory of your choice, for instance (on Linux/MacOS):
    `~/.agda/libraries.d/standard-library`
-3. Recommended: in this directory rename `agda-stdlib-2.3` to `v2.3` (or similar).
+3. Recommended: in this directory rename `agda-stdlib-2.4` to `v2.4` (or similar).
 4. Add the following line to your `~/.agda/libraries` file (create it if it does not exist):
    ```
-   ~/.agda/libraries.d/standard-library/v2.3/standard-library.agda-lib
+   ~/.agda/libraries.d/standard-library/v2.4/standard-library.agda-lib
    ```
    In this you need to expand `~` manually to your home folder.
 

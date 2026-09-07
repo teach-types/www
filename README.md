@@ -69,6 +69,8 @@ Lectures
 
 ## Lecture 1
 
+- Introduction to formal proof
+- Types in software engineering: [slides](slides/Lecture1.pdf)
 - Introduction to Agda
 - Simply-typed programming in Agda
 

@@ -77,7 +77,12 @@ Agda code: [live code start](live/Lecture1.agda), [solution](src/Lecture1.agda),
 ## Lecture 2
 
 - General introduction to logic and dependent types [slides](slides/lecture2.pdf)
-- Example of Turing Machines in Agda, how to formulate non termination
+- Programming and proving in Agda: Turing machines in Agda, how to formulate non termination, propositions as types [slides](slides/lecture2-proving.pdf)
+
+Agda code: [bb2.agda](live/bb2.agda) (Turing machines, the Busy Beaver champions, a proof that a machine never stops),
+[euclidean.agda](live/euclidean.agda) (de Bruijn's example, the Poincaré principle),
+[Gentzen.agda](live/Gentzen.agda) (natural deduction as programming),
+[exercises3.agda](live/exercises3.agda) (simple exercises on propositions as types)
 
 ## Exercise 1
 

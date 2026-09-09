@@ -8,6 +8,8 @@
 -- we represent the true proposition ⊤ as a data type having one constructor and the false proposition ⊥
 -- having no constructor
 
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module euclidean where
 
 open import Agda.Primitive renaming(Set to Type)

@@ -1,3 +1,5 @@
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module exercises3 where
 
 -- Propositions as types: simple exercises for lecture 3.

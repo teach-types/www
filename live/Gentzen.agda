@@ -1,3 +1,5 @@
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module Gentzen where
 
 open import Agda.Primitive renaming (Set to Type)

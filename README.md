@@ -81,10 +81,10 @@ Agda code: [live code start](live/Lecture1.agda), [solution](src/Lecture1.agda),
 - General introduction to logic and dependent types [slides](slides/lecture2.pdf)
 - Programming and proving in Agda: Turing machines in Agda, how to formulate non termination, propositions as types [slides](slides/lecture2-proving.pdf)
 
-Agda code: [bb2.agda](live/bb2.agda) (Turing machines, the Busy Beaver champions, a proof that a machine never stops),
-[euclidean.agda](live/euclidean.agda) (de Bruijn's example, the Poincaré principle),
-[Gentzen.agda](live/Gentzen.agda) (natural deduction as programming),
-[exercises3.agda](live/exercises3.agda) (simple exercises on propositions as types)
+Agda code: [bb2.agda](live/bb2.agda)    ([rendered](live/html/bb2.html)) (Turing machines, the Busy Beaver champions, a proof that a machine never stops),
+[euclidean.agda](live/euclidean.agda)   ([rendered](live/html/euclidean.html)) (de Bruijn's example, the Poincaré principle),
+[Gentzen.agda](live/Gentzen.agda)       ([rendered](live/html/Gentzen.html)) (natural deduction as programming),
+[exercises3.agda](live/exercises3.agda) ([rendered](live/html/exercises3.html)) (simple exercises on propositions as types)
 
 ## Exercise 1
 
@@ -95,12 +95,29 @@ We'll do some simple exercises in Agda.
 
 ## Lecture 3
 
+- Martin Löf Type Theory: principles
+- Typing and equality judgements
+- Formation, introduction, elimination, computation, and extensionality rules
+- Positive and negative types
+- Simple types: function space, cartesian product, disjoint sum, booleans and natural numbers
+
+## Lecture 4
+
+- Martin Löf Type Theory: dependent types
+- Dependent function type
+- Negative types: Π and Σ
+- Positive types: ℕ
+- The equality type
+- Universes
+
+## 2025 Lecture 3
+
 - More on Turing machines
 - Inductive predicates
 - Propositional and predicate logic
 - Propositions as Types, Natural Deduction in Agda
 
-## Lecture 4
+## 2025 Lecture 4
 
 - Data types, induction and indexed data types
 - Proof by induction on Data Types

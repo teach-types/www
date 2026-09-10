@@ -101,6 +101,8 @@ We'll do some simple exercises in Agda.
 - Positive and negative types
 - Simple types: function space, cartesian product, disjoint sum, booleans and natural numbers
 
+Slides: [lecture3.pdf](slides/lecture3.pdf)
+
 ## Lecture 4
 
 - Martin Löf Type Theory: dependent types

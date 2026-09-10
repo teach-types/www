@@ -31,8 +31,8 @@ This schedule is preliminary!
 | Thu 03/09   | 10-12   | AA | 01 [Introduction to Agda](#lecture-1) | LN 1 - 3; VFP 1, 3; DTW 1, 2.1 - 2.5 |  |
 | Mon 07/09   | 13-15   | TC | 02 [Dependent types](#lecture-2) |  |
 | _Mon 07/09_ | _15-17_ | AA | [Getting started with Agda](#exercise-1) |  |
-| Thu 10/09   | 10-12   | AA | 03 [Proving in Agda](#lecture-3) |  |
-| Mon 14/09   | 13-15   | AA | 04 [Introduction to operational semantics and type systems](#lecture-4)  | TPL 1-3 |
+| Thu 10/09   | 10-12   | AA | 03 [Martin-Löf Type Theory (part 1)](#lecture-3) |  |
+| Mon 14/09   | 13-15   | AA | 04 [Martin-Löf Type Theory (part 2)](#lecture-4)  | TPL 1-3 |
 | _Mon 14/09_ | _15-17_ | TC | [More on Agda](#exercise-2) | _Homework 1 due_  |
 | Thu 17/09   | 10-12   | TC | 05 [Introduction to operational semantics and type systems](#lecture-5)  | TPL 3-4 |
 | Mon 21/09   | 13-15   | TC | 06 [Introduction to operational semantics and type systems](#lecture-6)  | TPL 5-10 |

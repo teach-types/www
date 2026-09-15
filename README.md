@@ -109,8 +109,10 @@ Slides: [lecture3.pdf](slides/lecture3.pdf)
 - Dependent function type
 - Negative types: Π and Σ
 - Positive types: ℕ
-- The equality type
+- The equality type (not covering J or K)
 - Universes
+
+Slides: [lecture4.pdf](slides/lecture4.pdf)
 
 ## 2025 Lecture 3
 

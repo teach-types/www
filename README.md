@@ -34,7 +34,7 @@ This schedule is preliminary!
 | Thu 10/09   | 10-12   | AA | 03 [Martin-Löf Type Theory (part 1)](#lecture-3) |  |
 | Mon 14/09   | 13-15   | AA | 04 [Martin-Löf Type Theory (part 2)](#lecture-4)  | TPL 1-3 |
 | _Mon 14/09_ | _15-17_ | TC | [More on Agda](#exercise-2) | _Homework 1 due_  |
-| Thu 17/09   | 10-12   | TC | 05 [Introduction to operational semantics and type systems](#lecture-5)  | TPL 3-4 |
+| Thu 17/09   | 10-12   | TC | 05 [The identity type and indexed inductive types](#lecture-5)  | TPL 3-4 |
 | Mon 21/09   | 13-15   | TC | 06 [Introduction to operational semantics and type systems](#lecture-6)  | TPL 5-10 |
 | _Mon 21/09_ | _15-17_ | TC | [More on Agda](#exercise-3) | _Homework 2 due_  |
 | Thu 24/09   | 10-12   | TC | 07 [Introduction to operational semantics and type systems](#lecture-7)  |  |
@@ -131,12 +131,13 @@ Slides: [lecture4.pdf](slides/lecture4.pdf)
 
 ## Lecture 5
 
-- Hilbert and Gentzen calculus in Agda for propositional logic with implication
-- Show equivalence (deduction theorem)
-- Run equivalence as proof transformation
-- Untyped arithmetic expressions and operational semantics (small-step and big-step)
-- Typed predicate on arithmetic expressions
-- Progress and preservation theorems
+- Elimination rules and their motive: BoolRec, NatRec, listRec, TreeRec
+- The elimination rule of the identity type (J); subst and cong as instances of it
+- Pattern matching and eliminators; zero is not one
+- The identity type is intensional: function extensionality is not provable
+- Indexed inductive types: parameters and indices; Vec, Fin, the relation ≤, well-typed syntax
+- Two derivations of the transitivity of ≤
+- Hilbert calculus in Agda: derivations as an inductive family, the deduction theorem
 
 Slides: [lecture5.pdf](slides/lecture5.pdf)
 

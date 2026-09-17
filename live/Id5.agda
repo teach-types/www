@@ -144,21 +144,23 @@ revrev {A} = TreeRec (\ t -> Id (Tree A) t (rev (rev t)))
 -- AND the proof, and the premise is at refl
 -- ------------------------------------------------------------
 
+-- same shape as BoolRec, NatRec, listRec, TreeRec: the motive, then
+-- one premise per constructor, then the statement to be proved
 IdRec : {A : Set} -> (C : (x y : A) -> Id A x y -> Set) ->
-        (a b : A) -> (p : Id A a b) ->
-        ((x : A) -> C x x (refl x)) -> C a b p
-IdRec C a a (refl a) d = d a
+        ((x : A) -> C x x (refl x)) ->
+        (a b : A) -> (p : Id A a b) -> C a b p
+IdRec C d a a (refl a) = d a
 
 -- the traditional name of this eliminator is J
 J : {A : Set} -> (C : (x y : A) -> Id A x y -> Set) ->
-    (a b : A) -> (p : Id A a b) ->
-    ((x : A) -> C x x (refl x)) -> C a b p
+    ((x : A) -> C x x (refl x)) ->
+    (a b : A) -> (p : Id A a b) -> C a b p
 J = IdRec
 
--- computation rule:  IdRec C a a (refl a) d = d a   holds by definition
+-- computation rule:  IdRec C d a a (refl a) = d a   holds by definition
 Jcomp : {A : Set} -> (C : (x y : A) -> Id A x y -> Set) ->
         (d : (x : A) -> C x x (refl x)) -> (a : A) ->
-        Id (C a a (refl a)) (IdRec C a a (refl a) d) (d a)
+        Id (C a a (refl a)) (IdRec C d a a (refl a)) (d a)
 Jcomp C d a = refl (d a)
 
 -- ------------------------------------------------------------
@@ -168,31 +170,35 @@ Jcomp C d a = refl (d a)
 -- This is the rule Andreas gave, and it is an INSTANCE of J
 -- ------------------------------------------------------------
 
-subst : {A : Set} -> (C : A -> Set) -> {a b : A} -> Id A a b -> C a -> C b
-subst C {a} {b} p = J (\ x y _ -> C x -> C y) a b p (\ x w -> w)
+subst : {A : Set} -> (C : A -> Set) ->
+        (a b : A) -> Id A a b -> C a -> C b
+subst C = J (\ x y _ -> C x -> C y) (\ x w -> w)
 
 -- pattern matching gives it directly, with the same computation rule
-subst2 : {A : Set} -> (C : A -> Set) -> {a b : A} -> Id A a b -> C a -> C b
-subst2 C (refl a) c = c
+subst2 : {A : Set} -> (C : A -> Set) ->
+         (a b : A) -> Id A a b -> C a -> C b
+subst2 C a a (refl a) c = c
 
 -- Leibniz: equals may be substituted for equals.  From it:
-sym : {A : Set} -> {a b : A} -> Id A a b -> Id A b a
-sym {A} {a} p = subst (\ y -> Id A y a) p (refl a)
+sym : {A : Set} -> (a b : A) -> Id A a b -> Id A b a
+sym {A} a b p = subst (\ y -> Id A y a) a b p (refl a)
 
-trans : {A : Set} -> {a b c : A} -> Id A a b -> Id A b c -> Id A a c
-trans {A} {a} p q = subst (\ y -> Id A a y) q p
+trans : {A : Set} -> (a b c : A) -> Id A a b -> Id A b c -> Id A a c
+trans {A} a b c p q = subst (\ y -> Id A a y) b c q p
 
 -- cong of section 1 is the instance of subst whose motive is
 -- (\ y -> Id B (f a) (f y)), with base case refl (f a)
 congSubst : {A B : Set} -> (f : A -> B) -> {a b : A} ->
             Id A a b -> Id B (f a) (f b)
-congSubst {A} {B} f {a} p = subst (\ y -> Id B (f a) (f y)) p (refl (f a))
+congSubst {A} {B} f {a} {b} p =
+  subst (\ y -> Id B (f a) (f y)) a b p (refl (f a))
 
 -- the based form: the first endpoint is fixed, so the last premise is
 -- a single element instead of a function of x
-J' : {A : Set} -> (a b : A) -> (C : (y : A) -> Id A a y -> Set) ->
-     (p : Id A a b) -> C a (refl a) -> C b p
-J' a a C (refl a) c = c
+J' : {A : Set} -> (a : A) -> (C : (y : A) -> Id A a y -> Set) ->
+     C a (refl a) ->
+     (b : A) -> (p : Id A a b) -> C b p
+J' a C c a (refl a) = c
 
 -- ------------------------------------------------------------
 -- 5.  Zero is not one
@@ -215,7 +221,7 @@ eqNatRefl (suc x) = eqNatRefl x
 
 -- Id x y implies eqNat x y: this is subst, with motive (\ z -> eqNat x z)
 toEq : (x y : Nat) -> Id Nat x y -> eqNat x y
-toEq x y p = subst (\ z -> eqNat x z) p (eqNatRefl x)
+toEq x y p = subst (\ z -> eqNat x z) x y p (eqNatRefl x)
 
 -- and conversely, so the two are equivalent
 fromEq : (x y : Nat) -> eqNat x y -> Id Nat x y

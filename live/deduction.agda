@@ -255,9 +255,9 @@ cong f (refl a) = refl (f a)
 
 -- the general eliminator: the motive sees both endpoints AND the proof
 J : {A : Set} -> (C : (x y : A) -> Id A x y -> Set) ->
-    (a b : A) -> (p : Id A a b) ->
-    ((x : A) -> C x x (refl x)) -> C a b p
-J C a a (refl a) d = d a
+    ((x : A) -> C x x (refl x)) ->
+    (a b : A) -> (p : Id A a b) -> C a b p
+J C d a a (refl a) = d a
 
 -- ------------------------------------------------------------
 -- Where an index forces a transport

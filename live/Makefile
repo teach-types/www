@@ -1,5 +1,6 @@
 DIRS=stlc stlc-check stlc-lec9-start stlc-spine
-HTMLS=html/bb2.html html/Gentzen.html html/euclidean.html html/exercises3.html
+HTMLS=html/bb2.html html/Gentzen.html html/euclidean.html html/exercises3.html \
+      html/Id5.html html/deduction.html html/checksize.html
 
 .PHONY: all
 all: index.html $(DIRS) $(HTMLS)

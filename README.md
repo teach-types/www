@@ -138,6 +138,12 @@ Slides: [lecture4.pdf](slides/lecture4.pdf)
 - Typed predicate on arithmetic expressions
 - Progress and preservation theorems
 
+Slides: [lecture5.pdf](slides/lecture5.pdf)
+
+Agda code: [Id5.agda](live/Id5.agda) ([rendered](live/html/Id5.html)) (the identity type: elimination rules and their motive, J, subst, cong),
+[deduction.agda](live/deduction.agda) ([rendered](live/html/deduction.html)) (indexed inductive types, derivations as an inductive family, the deduction theorem),
+[checksize.agda](live/checksize.agda) ([rendered](live/html/checksize.html)) (the size of the derivations built by the deduction theorem)
+
 ## Lecture 6
 
 - General results on untyped lambda calculus:

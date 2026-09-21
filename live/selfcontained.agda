@@ -539,7 +539,7 @@ data HasType where
 
   -- Γ ⊢ A : U   Γ,x:A ⊢ B : U   Γ ⊢ f : Π(x:A)B   Γ ⊢ a : A
   -- ─────────────────────────────────────────────────────────────
-  -- Γ ⊢ f a : B[x/a]
+  -- Γ ⊢ f a : B[a/x]
   ty-App : {n : Nat} {G : Ctx n} {A : Expr n} {B : Expr (suc n)}
     {f a : Expr n}
     -> HasType G A U

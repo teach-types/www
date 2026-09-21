@@ -30,7 +30,7 @@ module minimalrules where
  know Γ ⊢ A : U -- and that is the presupposition lemma, applied to a
  derivation which is NOT a subderivation of the one we are analysing.  The
  presupposition lemma in turn needs, in the case of application, that
- Γ ⊢ B[x/a] : U, which is the substitution lemma.  The two call each other on
+ Γ ⊢ B[a/x] : U, which is the substitution lemma.  The two call each other on
  derivations of unrelated size: there is no structural induction, and no
  induction on the height of the derivations either.
 
@@ -118,7 +118,7 @@ data HasTypeM where
 
  --  Γ ⊢ f : Π(x:A)B    Γ ⊢ a : A
  -- -------------------------------
- --  Γ ⊢ f a : B[x/a]
+ --  Γ ⊢ f a : B[a/x]
  --
  -- A and B are read off the type of f
  tyM-App : {n : Nat} -> {G : Ctx n} -> {A : Expr n} -> {B : Expr (suc n)} ->
@@ -159,7 +159,7 @@ data ConvTmM where
 
  --  Γ, x:A ⊢ M : B     Γ ⊢ a : A
  -- ------------------------------------------
- --  Γ ⊢ (λ(x:A)M) a = M[x/a] : B[x/a]
+ --  Γ ⊢ (λ(x:A)M) a = M[a/x] : B[a/x]
  cvM-beta : {n : Nat} -> {G : Ctx n} -> {A : Expr n} -> {B M : Expr (suc n)} ->
             {a : Expr n} ->
             HasTypeM (extend G A) M B ->
@@ -176,7 +176,7 @@ data ConvTmM where
 
  --  Γ ⊢ f = f' : Π(x:A)B     Γ ⊢ a = a' : A
  -- -------------------------------------------
- --  Γ ⊢ f a = f' a' : B[x/a]
+ --  Γ ⊢ f a = f' a' : B[a/x]
  --
  -- the two congruences of typetype.agda in one rule
  cvM-App : {n : Nat} -> {G : Ctx n} -> {A : Expr n} -> {B : Expr (suc n)} ->
@@ -375,7 +375,7 @@ wkM dC d = toMin-ty (wk-HasType (toSelf-ty dC) (toSelf-ty d))
 --
 --   Γ, x:A ⊢ M : B     Γ ⊢ a : A
 --  --------------------------------
---   Γ ⊢ M[x/a] : B[x/a]
+--   Γ ⊢ M[a/x] : B[a/x]
 
 substM : {n : Nat} -> {G : Ctx n} -> {A : Expr n} -> {B M : Expr (suc n)} ->
          {a : Expr n} ->

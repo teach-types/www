@@ -110,7 +110,7 @@ subst1Sub : {n : Nat} -> Expr n -> Sub n (suc n)
 subst1Sub a  fzero    = a
 subst1Sub a (fsuc i)  = Var i
 
--- the B[x/a] of the slides
+-- the B[a/x] of the slides
 subst1 : {n : Nat} -> Expr (suc n) -> Expr n -> Expr n
 subst1 B a = substExpr (subst1Sub a) B
 
@@ -195,7 +195,7 @@ data HasType where
 
  --  Γ ⊢ A : U   Γ, x:A ⊢ B : U   Γ ⊢ f : Π(x:A)B   Γ ⊢ a : A
  -- -----------------------------------------------------------
- --  Γ ⊢ f a : B[x/a]
+ --  Γ ⊢ f a : B[a/x]
  ty-App : {n : Nat} -> {G : Ctx n} -> {A : Expr n} -> {B : Expr (suc n)} ->
           {f a : Expr n} ->
           HasType G A U ->
@@ -233,7 +233,7 @@ data ConvTm where
 
  --  Γ ⊢ A : U   Γ, x:A ⊢ B : U   Γ, x:A ⊢ M : B   Γ ⊢ a : A
  -- ----------------------------------------------------------
- --  Γ ⊢ (λ(x:A)M) a = M[x/a] : B[x/a]
+ --  Γ ⊢ (λ(x:A)M) a = M[a/x] : B[a/x]
  conv-beta : {n : Nat} -> {G : Ctx n} -> {A : Expr n} -> {B M : Expr (suc n)} ->
              {a : Expr n} ->
              HasType G A U ->
@@ -270,7 +270,7 @@ data ConvTm where
 
  --  Γ ⊢ A : U   Γ,x:A ⊢ B : U   Γ ⊢ f = f' : Π(x:A)B   Γ ⊢ a : A
  -- ----------------------------------------------------------------
- --  Γ ⊢ f a = f' a : B[x/a]
+ --  Γ ⊢ f a = f' a : B[a/x]
  conv-App-fun : {n : Nat} -> {G : Ctx n} -> {A : Expr n} -> {B : Expr (suc n)} ->
                 {f f' a : Expr n} ->
                 HasType G A U ->
@@ -281,7 +281,7 @@ data ConvTm where
 
  --  Γ ⊢ A : U   Γ,x:A ⊢ B : U   Γ ⊢ f : Π(x:A)B   Γ ⊢ a = a' : A
  -- ----------------------------------------------------------------
- --  Γ ⊢ f a = f a' : B[x/a]
+ --  Γ ⊢ f a = f a' : B[a/x]
  conv-App-arg : {n : Nat} -> {G : Ctx n} -> {A : Expr n} -> {B : Expr (suc n)} ->
                 {f a a' : Expr n} ->
                 HasType G A U ->

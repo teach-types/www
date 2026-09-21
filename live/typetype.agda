@@ -69,7 +69,7 @@ data Expr : Nat -> Set where
 -- PART 2.  Renaming and substitution
 --
 -- Nothing conceptual here: this is the bookkeeping that makes the
--- notation B[x/a] of the slides precise.  It is written once and for
+-- notation B[a/x] of the slides precise.  It is written once and for
 -- all, by structural recursion on the expression.
 -- ============================================================
 
@@ -107,7 +107,7 @@ substExpr s (Pi A B)   = Pi (substExpr s A) (substExpr (liftSub s) B)
 substExpr s (Lam A M)  = Lam (substExpr s A) (substExpr (liftSub s) M)
 substExpr s (App f a)  = App (substExpr s f) (substExpr s a)
 
--- substituting the ONE variable fzero: this is the B[x/a] of the slides
+-- substituting the ONE variable fzero: this is the B[a/x] of the slides
 subst1Sub : {n : Nat} -> Expr n -> Sub n (suc n)
 subst1Sub a  fzero    = a
 subst1Sub a (fsuc i)  = Var i
@@ -216,7 +216,7 @@ data HasType where
 
  --  Γ ⊢ A : U   Γ, x:A ⊢ B : U   Γ ⊢ f : Π(x:A)B   Γ ⊢ a : A
  -- -----------------------------------------------------------
- --  Γ ⊢ f a : B[x/a]
+ --  Γ ⊢ f a : B[a/x]
  ty-App : {n : Nat} -> {G : Ctx n} -> {A : Expr n} -> {B : Expr (suc n)} ->
           {f a : Expr n} ->
           HasType G A U ->
@@ -262,7 +262,7 @@ data ConvTm where
 
  --  Γ ⊢ A : U   Γ, x:A ⊢ B : U   Γ, x:A ⊢ M : B   Γ ⊢ a : A
  -- ----------------------------------------------------------
- --  Γ ⊢ (λ(x:A)M) a = M[x/a] : B[x/a]              <- the beta rule
+ --  Γ ⊢ (λ(x:A)M) a = M[a/x] : B[a/x]              <- the beta rule
  conv-beta : {n : Nat} -> {G : Ctx n} -> {A : Expr n} -> {B M : Expr (suc n)} ->
              {a : Expr n} ->
              HasType G A U ->
@@ -304,7 +304,7 @@ data ConvTm where
 
  --  Γ ⊢ A : U   Γ,x:A ⊢ B : U   Γ ⊢ f = f' : Π(x:A)B   Γ ⊢ a : A
  -- ----------------------------------------------------------------
- --  Γ ⊢ f a = f' a : B[x/a]
+ --  Γ ⊢ f a = f' a : B[a/x]
  conv-App-fun : {n : Nat} -> {G : Ctx n} -> {A : Expr n} -> {B : Expr (suc n)} ->
                 {f f' a : Expr n} ->
                 HasType G A U ->
@@ -315,7 +315,7 @@ data ConvTm where
 
  --  Γ ⊢ A : U   Γ,x:A ⊢ B : U   Γ ⊢ f : Π(x:A)B   Γ ⊢ a = a' : A
  -- ----------------------------------------------------------------
- --  Γ ⊢ f a = f a' : B[x/a]
+ --  Γ ⊢ f a = f a' : B[a/x]
  conv-App-arg : {n : Nat} -> {G : Ctx n} -> {A : Expr n} -> {B : Expr (suc n)} ->
                 {f a a' : Expr n} ->
                 HasType G A U ->

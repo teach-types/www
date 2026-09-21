@@ -147,10 +147,21 @@ Agda code: [Id5.agda](live/Id5.agda) ([rendered](live/html/Id5.html)) (the ident
 
 ## Lecture 6
 
-- General results on untyped lambda calculus:
-- Confluence of reduction
-- Equivalence from reduction
-- Representation of untyped lambda calculus in Agda
+- The deduction theorem, finished; derivations from no hypothesis as an inductive family
+- How to show that a formula is *not* derivable: build a model, and prove soundness by induction on the derivation
+- The truth tables: no atom is derivable. Peirce's law is a classical tautology, so truth values cannot refute it
+- A model with two stages of knowledge: forcing, and Peirce's law is not derivable
+- What a system of rules consists of: a raw syntax, the judgment forms, a finite list of rules
+- The three judgments of a dependent type theory; the typing rules and the conversion rules, written out
+- Why the premises are so many, and what dropping the redundant ones costs
+- Type : Type, and the same rules in Agda
+
+Slides: [lecture6.pdf](slides/lecture6.pdf)
+
+Agda code: [peirce.agda](live/peirce.agda) ([rendered](live/html/peirce.html)) (the truth tables, and forcing over two stages of knowledge: Peirce's law is not derivable),
+[typetype.agda](live/typetype.agda) ([rendered](live/html/typetype.html)) (the rules of the slides, constructor for constructor, as an indexed inductive family),
+[minimalrules.agda](live/minimalrules.agda) ([rendered](live/html/minimalrules.html)) (the same theory with the redundant premises dropped, the translations both ways, and the presupposition, weakening and substitution lemmas; it imports [selfcontained.agda](live/selfcontained.agda) ([rendered](live/html/selfcontained.html))),
+[xirule.agda](live/xirule.agda) ([rendered](live/html/xirule.html)) (the ξ rule derived from β and function extensionality; this file *postulates* the two weakening lemmas, which are theorems in minimalrules.agda)
 
 ## Lecture 7
 

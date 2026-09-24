@@ -178,7 +178,7 @@ Agda code: [arith1.agda](live/arith1.agda) ([rendered](live/html/arith1.html)) (
 [operational.agda](live/operational.agda) ([rendered](live/html/operational.html)) (big-step semantics and its soundness; it imports arith1.agda),
 [compiler.agda](live/compiler.agda) ([rendered](live/html/compiler.html)) (the stack machine, the compiler and its correctness, with named intermediate steps),
 [compiler2.agda](live/compiler2.agda) ([rendered](live/html/compiler2.html)) (the same proof term without the named steps),
-[Confluence.agda](live/Confluence.agda) ([rendered](live/html/Confluence.html)) (the Church-Rosser theorem for β-reduction, following Martin-Löf's proof by parallel reduction as given in Appendix II of Barendregt's thesis (1971), lemma by lemma; historically, this proof was one of Plotkin's motivations for operational semantics. It uses the syntax of the rules of Type : Type from [selfcontained.agda](live/selfcontained.agda))
+[Confluence.agda](live/Confluence.agda) ([rendered](live/html/Confluence.html)) (the Church-Rosser theorem for β-reduction, following Martin-Löf's proof by parallel reduction as given in [Appendix II of Barendregt's thesis](live/barendregt-1971-appendix-II.pdf) (1971), lemma by lemma; historically, this proof was one of Plotkin's motivations for operational semantics. It uses the syntax of the rules of Type : Type from [selfcontained.agda](live/selfcontained.agda))
 
 ## Lecture 8
 

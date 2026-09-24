@@ -4,7 +4,7 @@ HTMLS=html/bb2.html html/Gentzen.html html/euclidean.html html/exercises3.html \
       html/peirce.html html/typetype.html html/xirule.html \
       html/minimalrules.html html/selfcontained.html \
       html/arith1.html html/arithexp.html html/operational.html \
-      html/compiler.html html/compiler2.html
+      html/compiler.html html/compiler2.html html/Confluence.html
 
 .PHONY: all
 all: index.html $(DIRS) $(HTMLS)

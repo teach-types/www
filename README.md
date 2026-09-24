@@ -165,8 +165,19 @@ Agda code: [peirce.agda](live/peirce.agda) ([rendered](live/html/peirce.html)) (
 
 ## Lecture 7
 
-- Correctness of a simple compiler to stack machine with addition
-- Krivine machine
+- A very small programming language (booleans and natural numbers): its syntax and the one-step relation `e => e'`
+- Values, and expressions which get stuck
+- The typing relation `e :: T`; preservation, canonical forms and progress, hence type safety
+- Big-step semantics `e ⇓ v`, and how it relates to the one-step relation
+- A compiler to a stack machine, and its correctness proof: finding the statement which the induction can carry
+
+Slides: [lecture7.pdf](slides/lecture7.pdf)
+
+Agda code: [arith1.agda](live/arith1.agda) ([rendered](live/html/arith1.html)) (the language, small-step semantics, typing, preservation and progress),
+[arithexp.agda](live/arithexp.agda) ([rendered](live/html/arithexp.html)) (a variant where progress is an inductive family, and a well-typed normal form is a value),
+[operational.agda](live/operational.agda) ([rendered](live/html/operational.html)) (big-step semantics and its soundness; it imports arith1.agda),
+[compiler.agda](live/compiler.agda) ([rendered](live/html/compiler.html)) (the stack machine, the compiler and its correctness, with named intermediate steps),
+[compiler2.agda](live/compiler2.agda) ([rendered](live/html/compiler2.html)) (the same proof term without the named steps)
 
 ## Lecture 8
 

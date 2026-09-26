@@ -33,7 +33,7 @@ This schedule is preliminary!
 | _Mon 07/09_ | _15-17_ | AA | [Getting started with Agda](#exercise-1) |  |
 | Thu 10/09   | 10-12   | AA | 03 [Martin-Löf Type Theory (part 1)](#lecture-3) |  |
 | Mon 14/09   | 13-15   | AA | 04 [Martin-Löf Type Theory (part 2)](#lecture-4)  | TPL 1-3 |
-| _Mon 14/09_ | _15-17_ | TC | [More on Agda](#exercise-2) | _Homework 1 due_  |
+| _Mon 14/09_ | _15-17_ | AA | [More on Agda](#exercise-2) | _Homework 1 due_  |
 | Thu 17/09   | 10-12   | TC | 05 [The identity type and indexed inductive types](#lecture-5)  | TPL 3-4 |
 | Mon 21/09   | 13-15   | TC | 06 [Introduction to operational semantics and type systems](#lecture-6)  | TPL 5-10 |
 | _Mon 21/09_ | _15-17_ | TC | [More on Agda](#exercise-3) | _Homework 2 due_  |
@@ -43,7 +43,7 @@ This schedule is preliminary!
 | Thu 01/10   | 10-12   | AA | 09 [More on operational semantics and type systems in Agda](#lecture-9)  |  |
 | Mon 05/10   | 13-15   | AA | 10 [More on operational semantics and type systems in Agda](#lecture-10) |  |
 | _Mon 05/10_ | _15-17_ | AA | [Exercises on operational semantics and type systems in Agda](#exercise-5) | _Homework 4 due_  |
-| Thu 08/10   | 10-12   | AA | 11 [More on operational semantics and type systems in Agda](#lecture-11) |  |
+| Thu 08/10   | 10-12   | AA | 11 [More on operational semantics and type systems in Agda](#lecture-11) | *Danielsson: MSc topics* |
 | Mon 12/10   | 13-15   | TC | Student presentations |   |
 | Mon 12/10   | 15-17   | TC | Student presentations |   |
 | Thu 15/10   | 10-12   | TC | Student presentations |   |

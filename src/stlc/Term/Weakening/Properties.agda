@@ -24,34 +24,34 @@ private
 --
 -- The proof is not entirely trivial and needs a lemma:
 --
--- We first observe that if ρ : Wk Γ (a ∷ Δ) then "a" must appear somewhere in Γ,
--- so Γ is of the form Γ₁ ++ a ∷ Γ₂, and further ρ' : Wk Γ₂ Δ.
+-- We first observe that if ρ : Wk Γ (Δ ∙ a) then "a" must appear somewhere in Γ,
+-- so Γ is of the form Γ₁ ++ Γ ∙ a₂, and further ρ' : Wk Γ₂ Δ.
 -- This means that ρ is obtained from ρ' by one "keep" and zero or more "skip"s.
 --
 -- The proof is by induction on ρ.
 -- If it is a "skip", proceed by induction hypothesis;
 -- otherwise it is a "keep", then the proof is immediate.
 
-Wk-cons-inv : Wk Γ (a ∷ Δ) → ∃ λ Γ₁ → ∃ λ Γ₂ → (Γ ≡ Γ₁ ++ a ∷ Γ₂) × Wk Γ₂ Δ
+Wk-cons-inv : Wk Γ (Δ ∙ a) → ∃ λ Γ₁ → ∃ λ Γ₂ → (Γ ≡ Γ₂ ∙ a ∙∙ Γ₁) × Wk Γ₂ Δ
 Wk-cons-inv (skip ρ) with Wk-cons-inv ρ
-... | Γ₁ , Γ₂ , refl , ρ' = (_ ∷ Γ₁) , _ , refl , ρ'
-Wk-cons-inv (keep ρ) = [] , _ , refl , ρ
+... | Γ₁ , Γ₂ , refl , ρ' = (Γ₁ ∙ _) , _ , refl , ρ'
+Wk-cons-inv (keep ρ) = ε , _ , refl , ρ
 
--- The lemma can be generalized to  ρ : Wk Γ (Δ₁ ++ a ∷ Δ₂).
+-- The lemma can be generalized to  ρ : Wk Γ (Δ₁ ++ Δ ∙ a₂).
 -- Here, Γ can be decomposed in the same way.
 --
 -- The proof is by induction on Δ₁, using the previous lemma for the base case Δ₁ = [].
 
-Wk-append-inv : Wk Γ (Δ₁ ++ a ∷ Δ₂) → ∃ λ Γ₁ → ∃ λ Γ₂ → (Γ ≡ Γ₁ ++ a ∷ Γ₂) × Wk Γ₂ Δ₂
-Wk-append-inv {Δ₁ = []} ρ = Wk-cons-inv ρ
-Wk-append-inv {Δ₁ = a ∷ Δ₁} (skip ρ) with Wk-append-inv {Δ₁ = a ∷ Δ₁} ρ
-... | Γ₁ , Γ₂ , refl , ρ' = _ ∷ _ , _ , refl , ρ'
-Wk-append-inv {Δ₁ = a ∷ Δ₁} (keep ρ) with Wk-append-inv ρ
-... | Γ₁ , Γ₂ , refl , ρ' = _ ∷ _ , _ , refl , ρ'
+Wk-append-inv : Wk Γ (Δ₂ ∙ a ∙∙ Δ₁) → ∃ λ Γ₁ → ∃ λ Γ₂ → (Γ ≡ Γ₂ ∙ a ∙∙ Γ₁) × Wk Γ₂ Δ₂
+Wk-append-inv {Δ₁ = ε} ρ = Wk-cons-inv ρ
+Wk-append-inv {Δ₁ = Δ ∙ a₁} (skip ρ) with Wk-append-inv {Δ₁ = Δ ∙ a₁} ρ
+... | Γ₁ , Γ₂ , refl , ρ' = _ ∙ _ , _ , refl , ρ'
+Wk-append-inv {Δ₁ = Δ ∙ a₁} (keep ρ) with Wk-append-inv ρ
+... | Γ₁ , Γ₂ , refl , ρ' = _ ∙ _ , _ , refl , ρ'
 
--- We can now prove that Wk Γ (Δ ++ a ∷ Γ) is impossible.
--- By the previous lemma we get Γ ≡ Γ₁ ++ a ∷ Γ₂ and Wk Γ₂ Γ which is
--- Wk Γ₂ (Γ₁ ++ a ∷ Γ₂).
+-- We can now prove that Wk Γ (Δ ++ Γ ∙ a) is impossible.
+-- By the previous lemma we get Γ ≡ Γ₁ ++ Γ ∙ a₂ and Wk Γ₂ Γ which is
+-- Wk Γ₂ (Γ₁ ++ Γ ∙ a₂).
 -- Thus, we are back to what we want to prove, but for Γ₂ which is shorter than Γ.
 -- The proof can hence proceed on well-founded induction on Γ (or its length).
 
@@ -62,15 +62,15 @@ Wk-append-inv {Δ₁ = a ∷ Δ₁} (keep ρ) with Wk-append-inv ρ
 -- However, with some more effort we could make the argument completely formal.
 
 {-# TERMINATING #-}
-Wk-append : Wk Γ (Δ ++ a ∷ Γ) → ⊥
+Wk-append : Wk Γ (Γ ∙ a ∙∙ Δ) → ⊥
 Wk-append ρ with Wk-append-inv ρ
 ... | Γ₁ , Γ₂ , refl , ρ' = Wk-append ρ'
 
--- In particular,  Wk Γ (a ∷ Γ) is impossible, which we knew all along,
+-- In particular,  Wk Γ (Γ ∙ a) is impossible, which we knew all along,
 -- but the proof of that "trivial" fact required some thinking.
 
-Wk-cons : Wk Γ (a ∷ Γ) → ⊥
-Wk-cons ρ = Wk-append {Δ = []} ρ
+Wk-cons : Wk Γ (Γ ∙ a) → ⊥
+Wk-cons ρ = Wk-append {Δ = ε} ρ
 
 -- We can now show that weakening is anti-symmetric, i.e.,
 -- if  ρ : Wk Γ Δ  and  ρ' : Wk Δ Γ  then Γ ≡ Δ.
@@ -82,7 +82,7 @@ Wk-anti-sym : Wk Γ Δ → Wk Δ Γ → Γ ≡ Δ
 Wk-anti-sym (skip ρ) ρ'        = case Wk-cons (compWW ρ ρ') of λ()
 Wk-anti-sym (keep ρ) (skip ρ') = case Wk-cons (compWW ρ ρ') of λ()
 -- Diagonal cases are easy:
-Wk-anti-sym (keep ρ) (keep ρ') = cong (_ ∷_) (Wk-anti-sym ρ ρ')
+Wk-anti-sym (keep ρ) (keep ρ') = cong (_∙ _) (Wk-anti-sym ρ ρ')
 Wk-anti-sym  done     done     = refl
 
 -- In fact, if  ρ : Wk Γ Δ  and  ρ' : Wk Δ Γ  then even  ρ ≡ ρ'.

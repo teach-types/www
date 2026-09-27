@@ -24,8 +24,8 @@ data CheckError : Set where
 -- and indirectly to their de Bruijn index.
 
 data Scope : Context → Set where
-  empty : Scope []
-  cons  : (x : Ident) (a : Ty) (sc : Scope Γ) → Scope (a ∷ Γ)
+  empty : Scope ε
+  cons  : (x : Ident) (a : Ty) (sc : Scope Γ) → Scope (Γ ∙ a)
 
 -- Looking up an identifier in the scope can fail.
 -- If it succeeds, it returns the type and evidence that

@@ -2,7 +2,7 @@
 
 module Term.Weakening where
 
-open import Prelude
+open import Prelude hiding (_++_)
 open import Term
 
 private
@@ -19,9 +19,9 @@ private
 -- is stepwise constructed from Γ, by either keeping or skipping assumptions.
 
 data Wk : (Γ Δ : Context) → Set where
-  done : Wk [] []
-  skip : (ρ : Wk Γ Δ) → Wk (a ∷ Γ) Δ
-  keep : (ρ : Wk Γ Δ) → Wk (a ∷ Γ) (a ∷ Δ)
+  done : Wk ε ε
+  skip : (ρ : Wk Γ Δ) → Wk (Γ ∙ a) Δ
+  keep : (ρ : Wk Γ Δ) → Wk (Γ ∙ a) (Δ ∙ a)
 
 -- If  Wk Γ Δ, then any assumption a ∈ Δ is also in Γ.
 -- lookup (ρ : Wk Γ Δ) transport de Bruijn indices a ∈ Δ to those a ∈ Γ.
@@ -44,8 +44,8 @@ wk ρ (app t u) = app (wk ρ t) (wk ρ u)
 -- Weakening compose, so they form a category with identity idW.
 
 idW : Wk Γ Γ
-idW {Γ = []}    = done
-idW {Γ = x ∷ Γ} = keep idW
+idW {Γ = ε}    = done
+idW {Γ = Γ ∙ x} = keep idW
 
 -- We write composition in the diagrammatic order, so that
 -- wk (compWW ρ ρ') = wk ρ ∘ wk ρ'.
@@ -58,12 +58,12 @@ compWW (keep ρ) (keep ρ') = keep (compWW ρ ρ')
 
 -- Some shorthands for common weakenings and weakening operations.
 
-skip1 : Wk (a ∷ Γ) Γ
+skip1 : Wk (Γ ∙ a) Γ
 skip1 = skip idW
 
-skips : Wk Γ Δ → Wk (Φ ++ Γ) Δ
-skips {Φ = []}    ρ = ρ
-skips {Φ = a ∷ Φ} ρ = skip (skips ρ)
+skips : Wk Γ Δ → Wk (Γ ∙∙ Φ) Δ
+skips {Φ = ε}     ρ = ρ
+skips {Φ = Φ ∙ a} ρ = skip (skips ρ)
 
-wk1 : Term Γ b → Term (a ∷ Γ) b
+wk1 : Term Γ b → Term (Γ ∙ a) b
 wk1 = wk skip1

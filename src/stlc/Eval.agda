@@ -15,14 +15,14 @@ module Den (ξ : BaseTy → Set) where
   Value (a ⇒ b) = Value a → Value b
 
   data Env : Context → Set where
-    []  : Env []
-    _∷_ : (v : Value a) (ρ : Env Γ) → Env (a ∷ Γ)
+    ε   : Env ε
+    _∙_ : (ρ : Env Γ) (v : Value a) → Env (Γ ∙ a)
 
   lookup : Env Γ → a ∈ Γ → Value a
-  lookup (v ∷ ρ) zero = v
-  lookup (v ∷ ρ) (suc x) = lookup ρ x
+  lookup (ρ ∙ v) zero = v
+  lookup (ρ ∙ v) (suc x) = lookup ρ x
 
   eval : Env Γ → Term Γ a → Value a
   eval ρ (var x)   = lookup ρ x
-  eval ρ (abs t)   = λ v → eval (v ∷ ρ) t
+  eval ρ (abs t)   = λ v → eval (ρ ∙ v) t
   eval ρ (app t u) = eval ρ t (eval ρ u)

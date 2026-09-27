@@ -1,8 +1,8 @@
 -- For computing with terms, in particular, for β-reduction, we need
 -- to substitute terms for variables.
 --
--- Given  t : Term (a ∷ Γ) b  and  u : Term Γ a  we wish to define substitution
--- for de Bruijn index zero : a ∈ (a ∷ Γ), namely  t [ u ]₀ : Term Γ b.
+-- Given  t : Term (Γ ∙ a) b  and  u : Term Γ a  we wish to define substitution
+-- for de Bruijn index zero : a ∈ (Γ ∙ a), namely  t [ u ]₀ : Term Γ b.
 -- This then allows us to define β-reduction  app (abs t) u ⟶ t [ u ]₀.
 -- (Observe that  abs t : Term Γ (a ⇒ b).)
 --
@@ -27,8 +27,8 @@
 -- In the case of abstraction, we get
 --
 --     sub (σ : Sub Γ Δ) (abs t : Term Δ (a ⇒ b)) : Term Γ (a ⇒ b)
---       = abs (sub (lift σ : Sub (a ∷ Γ) (a ∷ Δ))
---                  (t      : Term (a ∷ Δ) b))
+--       = abs (sub (lift σ : Sub (Γ ∙ a) (Δ ∙ a))
+--                  (t      : Term (Δ ∙ a) b))
 --
 -- The idea is that  lift σ  replaces index 0 by itself and index x+1 by
 -- σ(x) where each index in σ(x) is incremented.
@@ -38,7 +38,7 @@
 --
 --    []      : Sub Γ []       (no indices to replace)
 --
---    (t ∷ σ) : Sub Γ (a ∷ Δ)  when  t : Term Γ a  and  σ : Sub Γ Δ.
+--    (t ∷ σ) : Sub Γ (Δ ∙ a)  when  t : Term Γ a  and  σ : Sub Γ Δ.
 --
 -- In the second rule, t is the replacement for index 0 and σ the one for the other indices.
 --
@@ -50,13 +50,13 @@
 --
 -- The substitution
 --
---    skip1 : Sub (a ∷ Γ) Γ
+--    skip1 : Sub (Γ ∙ a) Γ
 --    skip1 = var 1 ∷ var 2 ∷ ... ∷ var |Γ| ∷ []
 --
 -- would do the job of incrementing each index by 1.
 -- Thus, we could define
 --
---    lift   : Sub Γ Δ → Sub (a ∷ Γ) (a ∷ Δ)
+--    lift   : Sub Γ Δ → Sub (Γ ∙ a) (Δ ∙ a)
 --    lift σ = var zero ∷ compSS skip1 σ
 --
 -- and use lift in the definition of sub for abstraction (see above).
@@ -88,28 +88,28 @@ private
 -- one for each variable bound in Δ.
 
 data Sub : (Γ Δ : Context) → Set where
-  []   : Sub Γ []
-  _∷_  : (t : Term Γ a) (σ : Sub Γ Δ) → Sub Γ (a ∷ Δ)
+  ε    : Sub Γ ε
+  _∙_  :  (σ : Sub Γ Δ) (t : Term Γ a) → Sub Γ (Δ ∙ a)
 
 -- compWS ρ σ weakens substitution σ according to ρ,
 -- i.e., applies the weakening ρ to each term in σ.
 
 compWS : Wk Γ Δ → Sub Δ Φ → Sub Γ Φ
-compWS ρ [] = []
-compWS ρ (t ∷ σ) = wk ρ t ∷ compWS ρ σ
+compWS ρ ε = ε
+compWS ρ (σ ∙ t) = compWS ρ σ ∙ wk ρ t
 
 -- We introduce a shorthand "weak σ" to weaken a substitution σ
 -- by just one new variable.
 
-weak : Sub Γ Δ → Sub (a ∷ Γ) Δ
+weak : Sub Γ Δ → Sub (Γ ∙ a) Δ
 weak = compWS skip1
 
 -- "lift σ" lifts substitution σ under a binder such as "abs".
 -- The de Bruijn index 0 bound here is mapped to itself,
 -- all other de Bruijn indices are incremented.
 
-lift : Sub Γ Δ → Sub (a ∷ Γ) (a ∷ Δ)
-lift σ = var zero ∷ weak σ
+lift : Sub Γ Δ → Sub (Γ ∙ a) (Δ ∙ a)
+lift σ = weak σ ∙ var zero
 
 -- "lookup σ x" returns the term t : Term Γ a
 -- the variable x : a ∈ Δ is mapped to by substitution σ : Sub Γ Δ.
@@ -117,9 +117,8 @@ lift σ = var zero ∷ weak σ
 -- from indices to terms.
 
 lookup : Sub Γ Δ → a ∈ Δ → Term Γ a
-lookup [] ()
-lookup (t ∷ σ) zero = t
-lookup (t ∷ σ) (suc x) = lookup σ x
+lookup (σ ∙ t) zero = t
+lookup (σ ∙ t) (suc x) = lookup σ x
 
 -- "sub σ t" carries out the substitution σ in term t.
 -- So, "sub σ" interprets σ as function from terms to terms.
@@ -132,7 +131,7 @@ sub σ (app t u) = app (sub σ t) (sub σ u)
 -- Weakenings can be seen as special substitutions ("variable substitutions").
 
 fromWk : (ρ : Wk Γ Δ) → Sub Γ Δ
-fromWk done     = []
+fromWk done     = ε
 fromWk (skip ρ) = weak (fromWk ρ)
 fromWk (keep ρ) = lift (fromWk ρ)
 
@@ -143,19 +142,19 @@ idS : Sub Γ Γ
 idS = fromWk idW
 
 compSS : Sub Γ Δ → Sub Δ Φ → Sub Γ Φ
-compSS σ [] = []
-compSS σ (t ∷ τ) = sub σ t ∷ compSS σ τ
+compSS σ ε       = ε
+compSS σ (τ ∙ t) = compSS σ τ ∙ sub σ t
 
 -- The singleton substitution is the substitution we are mainly interested in.
 
-sg : Term Γ a → Sub Γ (a ∷ Γ)
-sg t = t ∷ idS
+sg : Term Γ a → Sub Γ (Γ ∙ a)
+sg t = idS ∙ t
 
 -- Substituting a term for de Bruijn index 0.
 
 infixr 10 _[_]₀
 
-_[_]₀ : Term (a ∷ Γ) b → Term Γ a → Term Γ b
+_[_]₀ : Term (Γ ∙ a) b → Term Γ a → Term Γ b
 t [ u ]₀ = sub (sg u) t
 
 -- We can restrict a substitution σ : Sub Γ Δ
@@ -165,6 +164,6 @@ t [ u ]₀ = sub (sg u) t
 -- that only substitutes for the variables in Φ (sublist of Δ).
 
 compSW : Sub Γ Δ → Wk Δ Φ → Sub Γ Φ
-compSW []       done    = []
-compSW (t ∷ σ) (skip ρ) = compSW σ ρ
-compSW (t ∷ σ) (keep ρ) = t ∷ compSW σ ρ
+compSW ε       done    = ε
+compSW (σ ∙ t) (skip ρ) = compSW σ ρ
+compSW (σ ∙ t) (keep ρ) = compSW σ ρ ∙ t

@@ -95,7 +95,7 @@ mutual
 --
 -- In that, we need to consider reducible arguments in a larger context
 -- as we need to be able to apply a λ-term Term Γ (a ⇒ b)
--- to a new fresh variable a ∈ (a ∷ Γ) to show that it is weakly normalizing.
+-- to a new fresh variable a ∈ (Γ ∙ a) to show that it is weakly normalizing.
 --
 -- So, a term of base type is reducible if it is weakly normalizing.
 -- A term t : Term Γ (a ⇒ b) of function type is reducible if for each
@@ -110,14 +110,14 @@ mutual
 -- Reducibility for substitutions: a substitution is reducible if each of its terms is reducible.
 
 data Reds Γ : (Δ : Context) (σ : Sub Γ Δ) → Set where
-  []  : Reds Γ [] []
-  _∷_ : (⟦t⟧ : Red Γ a t) (⟦σ⟧ : Reds Γ Δ σ) → Reds Γ (a ∷ Δ) (t ∷ σ)
+  ε  : Reds Γ ε ε
+  _∙_ : (⟦σ⟧ : Reds Γ Δ σ) (⟦t⟧ : Red Γ a t) → Reds Γ (Δ ∙ a) (σ ∙ t)
 
 -- Projecting a term from a reducible substitution.
 
 ⟦lookup⟧ : (⟦σ⟧ : Reds Γ Δ σ) (x : a ∈ Δ) → Red Γ a (lookup σ x)
-⟦lookup⟧ (⟦t⟧ ∷ _) zero    = ⟦t⟧
-⟦lookup⟧ (_ ∷ ⟦σ⟧) (suc x) = ⟦lookup⟧ ⟦σ⟧ x
+⟦lookup⟧ (_ ∙ ⟦t⟧) zero    = ⟦t⟧
+⟦lookup⟧ (⟦σ⟧ ∙ _) (suc x) = ⟦lookup⟧ ⟦σ⟧ x
 
 -- Reducibility is closed under weak-head expansion.
 -- Proof by induction on the type.
@@ -161,8 +161,8 @@ wk-Red {a = a ⇒ b} {ρ = ρ} ⟦t⟧ ρ' ⟦u⟧ =
 -- Proven pointwise.
 
 wk-Reds : Reds Δ Γ σ → Reds Φ Γ (compWS ρ σ)
-wk-Reds [] = []
-wk-Reds (⟦t⟧ ∷ ⟦σ⟧) = wk-Red ⟦t⟧ ∷ wk-Reds ⟦σ⟧
+wk-Reds ε = ε
+wk-Reds (⟦σ⟧ ∙ ⟦t⟧) = wk-Reds ⟦σ⟧ ∙ wk-Red ⟦t⟧
 
 -- Proving that each well-typed term is reducible still fails in the case of abs
 -- where we need show that application to an arbitrary reducible argument
@@ -187,14 +187,14 @@ valid-var x ⟦σ⟧ = ⟦lookup⟧ ⟦σ⟧ x
 -- For abstractions, we need to work most: we need β-expansion
 -- of reduciblity.
 
-valid-abs : {t : Term (a ∷ Γ) b} → Valid t → Valid (abs t)
-valid-abs {a = a} {Γ = Γ} {b = b} {t = t} ⟦t⟧ {σ = σ} ⟦σ⟧ ρ {u = u} ⟦u⟧ =
+valid-abs : {t : Term (Γ ∙ a) b} → Valid t → Valid (abs t)
+valid-abs {Γ = Γ} {a = a} {b = b} {t = t} ⟦t⟧ {σ = σ} ⟦σ⟧ ρ {u = u} ⟦u⟧ =
   expand-Red
     (subst
       (app (wk ρ (sub σ (abs t))) u ≅_)
       (sub-S-sg {ρ = ρ} {σ = σ} {t = t} {u = u})
       β)
-    (⟦t⟧ {σ = u ∷ compWS ρ σ} (⟦u⟧ ∷ wk-Reds ⟦σ⟧))
+    (⟦t⟧ {σ = compWS ρ σ ∙ u} (wk-Reds ⟦σ⟧ ∙ ⟦u⟧))
 
 -- For application, validity holds by definition
 -- (except for a cast with the identity renaming).
@@ -237,14 +237,14 @@ mutual
   Red→wn {a =   ` α} wn = wn
   Red→wn {a = a ⇒ b} ⟦t⟧ = expand-wn η (wn-abs (Red→wn (⟦t⟧ skip1 ⟦var0⟧)))
 
-  ⟦var0⟧ : Red (a ∷ Γ) a (var zero)
+  ⟦var0⟧ : Red (Γ ∙ a) a (var zero)
   ⟦var0⟧ {a = a} = wne→Red wne-var
 
 -- The identity substitution is reducible.
 
 ⟦idS⟧ : Reds Γ Γ idS
-⟦idS⟧ {Γ = []}    = []
-⟦idS⟧ {Γ = a ∷ Γ} = ⟦var0⟧ ∷ wk-Reds ⟦idS⟧
+⟦idS⟧ {Γ = ε}     = ε
+⟦idS⟧ {Γ = Γ ∙ a} = wk-Reds ⟦idS⟧ ∙ ⟦var0⟧
 
 -- Normalization theorem: each well-typed term t is weakly normalizing.
 --
@@ -264,5 +264,5 @@ normalization t = subst wn (sub-id) (Red→wn (fund t ⟦idS⟧))
 
 -- Not used: Reducible substitutions are closed under lifting.
 
-⟦lift⟧ : (⟦σ⟧ : Reds Δ Γ σ) → Reds (a ∷ Δ) (a ∷ Γ) (lift σ)
-⟦lift⟧ ⟦σ⟧ = ⟦var0⟧ ∷ wk-Reds ⟦σ⟧
+⟦lift⟧ : (⟦σ⟧ : Reds Δ Γ σ) → Reds (Δ ∙ a) (Γ ∙ a) (lift σ)
+⟦lift⟧ ⟦σ⟧ = wk-Reds ⟦σ⟧ ∙ ⟦var0⟧

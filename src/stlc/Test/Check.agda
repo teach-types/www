@@ -21,7 +21,7 @@ open import Parser
 `b : Ty
 `b = ` "b"
 
-K-term : Check [] (`a ⇒ (`b ⇒ `a))
+K-term : Check ε (`a ⇒ (`b ⇒ `a))
 K-term = check empty (abs (uBind "x") (abs (uBind "y") (Exp.var "x"))) _
   -- checked (abs (abs (Term.var (suc zero))))
 

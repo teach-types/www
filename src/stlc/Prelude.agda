@@ -4,7 +4,7 @@ open import Agda.Primitive          public using () renaming (Set to Type)
 
 open import Data.Bool.Base          public using (Bool; true; false; if_then_else_)
 open import Data.Char.Base          public using (Char; isSpace)
-open import Data.Empty              public using (⊥)
+open import Data.Empty              public using (⊥; ⊥-elim)
 open import Data.Unit.Base          public using (⊤; tt)
 open import Data.List.Base          public using (List; []; _∷_; [_]; _++_; concat; reverse; head) hiding (module List)
 open import Data.List.NonEmpty.Base public using (List⁺; _∷_; _∷⁺_) hiding (module List⁺)
@@ -15,12 +15,14 @@ open import Data.Nat.Base           public using (ℕ; zero; suc) hiding (module
 
 open import Function                public using (id; _∘_; _$_; _|>_; case_of_; flip)
 
-open import Relation.Binary.PropositionalEquality public using (_≡_; refl; sym; trans; subst; cong; cong₂; module ≡-Reasoning)
+open import Relation.Binary.PropositionalEquality public using (_≡_; _≢_; refl; sym; trans; subst; cong; cong₂; module ≡-Reasoning)
 open import Relation.Nullary                      public using (Dec; yes; no)
+
+module ≡ = Relation.Binary.PropositionalEquality
 
 module String where
   open Data.String.Base public using (_++_; concat; fromList; toList)
-  open import Data.String public using (_≟_)
+  open import Data.String public using () renaming (_≡?_ to _≟_)
 
 module List where
   open import Data.List.Base public using (map; foldl; foldr)

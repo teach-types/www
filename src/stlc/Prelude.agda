@@ -22,7 +22,7 @@ module ≡ = Relation.Binary.PropositionalEquality
 
 module String where
   open Data.String.Base public using (_++_; concat; fromList; toList)
-  open import Data.String public using () renaming (_≡?_ to _≟_)
+  open import Data.String public using (_≟_) -- stdlib 3.0: using () renaming (_≡?_ to _≟_)
 
 module List where
   open import Data.List.Base public using (map; foldl; foldr)

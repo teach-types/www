@@ -38,3 +38,7 @@ import Term.Equality
 -- Normalization
 
 import Term.Normalization.EtaLong
+
+-- Normalization by Evaluation
+
+import Term.Normalization.NbE

@@ -38,7 +38,7 @@ This schedule is preliminary!
 | Mon 21/09   | 13-15   | TC | 06 [Introduction to operational semantics and type systems](#lecture-6)  | TPL 5-10 |
 | _Mon 21/09_ | _15-17_ | TC | [More on Agda](#exercise-3) | _Homework 2 due_  |
 | Thu 24/09   | 10-12   | TC | 07 [Introduction to operational semantics and type systems](#lecture-7)  |  |
-| Mon 28/09   | 13-15   | AA | 08 [Bidirectional type-checking](#lecture-8)  |  |
+| Mon 28/09   | 13-15   | AA | 08 [Simply typed lambda calculus and normalization by evaluation](#lecture-8)  |  |
 | _Mon 28/09_ | _15-17_ | AA | [More on Agda](#exercise-4) | _Homework 3 due_  |
 | Thu 01/10   | 10-12   | AA | 09 [More on operational semantics and type systems in Agda](#lecture-9)  |  |
 | Mon 05/10   | 13-15   | AA | 10 [More on operational semantics and type systems in Agda](#lecture-10) |  |
@@ -181,6 +181,28 @@ Agda code: [arith1.agda](live/arith1.agda) ([rendered](live/html/arith1.html)) (
 [Confluence.agda](live/Confluence.agda) ([rendered](live/html/Confluence.html)) (the Church-Rosser theorem for β-reduction, following Martin-Löf's proof by parallel reduction as given in [Appendix II of Barendregt's thesis](live/barendregt-1971-appendix-II.pdf) (1971), lemma by lemma; historically, this proof was one of Plotkin's motivations for operational semantics. It uses the syntax of the rules of Type : Type from [selfcontained.agda](live/selfcontained.agda))
 
 ## Lecture 8
+
+- Well-typed lambda-terms
+- Denotational semantics for typed lambda-calculus
+- Normal forms and neutrals
+- Refutation of Peirce via analysis of normal forms
+- Kripke models revisited
+- Soundness: evaluation into a Kripke model
+- Completeness: a Kripke model based on weakening and neutrals
+- Reification and reflection
+- Normalization by evaluation (NbE): completeness following soundness
+
+Slides: [lecture8.pdf](slides/lecture8.pdf)
+
+Agda code:
+
+- Intrinsically typed terms: [Term.agda](src/stlc/Term.agda), [rendered](src/stlc/html/Term.html)
+- Kripke models: [KripkeModel.agda](src/stlc/Term/KripkeModel.agda), [rendered](src/stlc/html/Term.KripkeModel.html)
+- Weakening: [Weakening.agda](src/stlc/Term/Weakening.agda), [rendered](src/stlc/html/Term.Weakening.html)
+- Normalization: [NbE.agda](src/stlc/Term/Normalization/NbE.agda), [rendered](src/stlc/html/Term.Normalization.NbE.html)
+
+
+## 2025 Lecture 8
 
 - Well-typed lambda-terms
 - Denotational semantics for typed lambda-calculus

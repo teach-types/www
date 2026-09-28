@@ -1,7 +1,19 @@
+-- Normalization by evaluation.
+--
+-- We use an instance of the Kripke model for STLC
+-- where worlds are contexts, future is weakening,
+-- and forcing `Γ ⊩ a` at base type `a` in world `Γ`
+-- is the set of normal forms of type `a` in context `Γ`.
+--
+-- The soundness theorem gives us for each term `Γ ⊢ a`
+-- a semantic value `Γ ⊩ a`, and a function `reify`
+-- defined by induction on `a` turns this into a normal
+-- form `Γ ⊢ₙ a` (that is the secret sauce).
+-- In combination, we get a function mapping terms to normal forms.
 
 module Term.Normalization.NbE where
 
-open import Prelude
+open import Prelude hiding (head)
 open import Term renaming (Term to _⊢_)
 open import Term.Weakening renaming (Wk to infix 4 _≤_; lookup to weakₓ)
 open import Term.KripkeModel
@@ -10,7 +22,7 @@ private
   variable
     Γ Δ Φ : Context
     α : BaseTy
-    a b : Ty
+    a b c : Ty
     x : a ∈ Γ
     t t' t'' u u' : Γ ⊢ a
     ρ : Γ ≤ Δ
@@ -31,7 +43,7 @@ module NormalForms where
 
     -- Normal forms (unless applied to further arguments).
 
-    data _⊢ₙ_ (Γ : Context) : (A : Ty) → Set where
+    data _⊢ₙ_ (Γ : Context) : (a : Ty) → Set where
       -- Neutrals are normal
       ne  : (u : Γ ⊢ᵤ a) → Γ ⊢ₙ a
       abs : (t : Γ ∙ a ⊢ₙ b) → Γ ⊢ₙ a ⇒ b
@@ -46,6 +58,57 @@ module NormalForms where
     weakₙ : (ρ : Γ ≤ Δ) (n : Δ ⊢ₙ a) → Γ ⊢ₙ a
     weakₙ ρ (ne u)     = ne (weakᵤ ρ u)
     weakₙ ρ (abs n)    = abs (weakₙ (keep ρ) n)
+
+  -- Normal spines
+
+  infix 4 _∣_⊢ₙ_
+  data _∣_⊢ₙ_ (Γ : Context) : (a : Ty) (c : Ty) → Set where
+    []  : Γ ∣ c ⊢ₙ c
+    _∷_ : (t : Γ ⊢ₙ a) (s : Γ ∣ b ⊢ₙ c) → Γ ∣ a ⇒ b ⊢ₙ c
+
+  private
+    variable
+      s : Γ ∣ a ⊢ₙ c
+
+  snoc : (s : Γ ∣ a ⊢ₙ b ⇒ c) (n : Γ ⊢ₙ b) → Γ ∣ a ⊢ₙ c
+  snoc []      n = n ∷ []
+  snoc (m ∷ s) n = m ∷ snoc s n
+
+  record NeSpine (Γ : Context) (c : Ty) : Set where
+    field
+      {ty} : Ty
+      head : ty ∈ Γ
+      spine : Γ ∣ ty ⊢ₙ c
+  open NeSpine using (head; spine)
+
+  neSpine : Γ ⊢ᵤ c → NeSpine Γ c
+  neSpine (var x) = record{ head = x; spine = [] }
+  neSpine (app u n) with neSpine u
+  ... | record{ head = x; spine = s} = record{ head = x; spine = snoc s n}
+
+  -- Application: there is no closed normal term of the Peirce type.
+  noClosedNeutral : ε ⊢ᵤ a → ⊥
+  noClosedNeutral (var ())
+  noClosedNeutral (app u _) = noClosedNeutral u
+
+  private
+    A = ` "A"
+    B = ` "B"
+
+  -- Lemma: we can't derive A ⇒ B from just (A ⇒ B) ⇒ A.
+
+  lemma : ε ∙ (A ⇒ B) ⇒ A ⊢ₙ A ⇒ B → ⊥
+  lemma (ne u) with neSpine u
+  ... | record { head = zero ; spine = t ∷ () }
+  lemma (abs (ne u)) with neSpine u
+  ... | record { head = suc zero ; spine = n ∷ () }
+
+  -- The Peirce formula has no normal derivation.
+
+  noPeirce : ε ⊢ₙ ((A ⇒ B) ⇒ A) ⇒ A → ⊥
+  noPeirce (ne u) = noClosedNeutral u
+  noPeirce (abs (ne u)) with neSpine u
+  ... | record { head = zero ; spine = n ∷ [] } = lemma n
 
 
 ------------------------------------------------------------------------

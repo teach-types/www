@@ -56,7 +56,7 @@ module Model (Structure : Kripke) (open Kripke Structure) where
   mon {A = ` X  } ρ a = monₐ ρ a
   mon {A = A ⇒ B} ρ f = λ ρ' a → f (trans ρ' ρ) a
 
-  -- K and S are forced always
+  -- Example: K and S are forced always
 
   ⊩K : w ⊩ A ⇒ B ⇒ A
   ⊩K {A = A} _ a η b = mon {A = A} η a
@@ -103,8 +103,8 @@ module PeirceStructure (X Y : Atom) where
   -- If X does not hold in the future either, then X ⇒ Y is always true,
   -- so (X ⇒ Y) ⇒ X is always false, so the formula is always valid.
   -- So X must be true in the future if we want to refute Peirce.
-  -- Say Y is true always, then Perice simplifies to X ⇒ X and is not refutable.
-  -- If Y is false always, then the formula simplifies to X ⇒ X now
+  -- A special case Y = ⊥ of Peirce is also refutable,
+  -- so let Y never hold.
 
   data _⊩ₐ_ : World → Atom → Set where
     futureX : future ⊩ₐ X
@@ -164,14 +164,6 @@ module Soundness (Structure : Kripke) where
   ⦅_⦆ₓ : A ∈ Γ → Γ ⊧ A
   ⦅ zero ⦆ₓ    (ρ ∙ a) = a
   ⦅ suc x ⦆ₓ (ρ ∙ a) = ⦅ x ⦆ₓ ρ
-
-  -- Lemma: K is valid
-  validK : Γ ⊧ A ⇒ B ⇒ A
-  validK {A = A} _ _ a η _ = mon {A = A} η a
-
-  -- Lemma: S is valid
-  validS : Γ ⊧ (A ⇒ B ⇒ C) ⇒ (A ⇒ B) ⇒ A ⇒ C
-  validS _ _ f η g η' a = f (trans η' η) a refl (g η' a)
 
   -- Lemma: application is valid
   apply : Γ ⊧ A ⇒ B → Γ ⊧ A → Γ ⊧ B

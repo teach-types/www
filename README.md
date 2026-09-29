@@ -195,7 +195,11 @@ Agda code: [arith1.agda](live/arith1.agda) ([rendered](live/html/arith1.html)) (
 Slides: [lecture8.pdf](slides/lecture8.pdf)
 
 Agda code:
+
 - All in one: [Lecture8.agda](src/stlc/Lecture8.agda), [rendered](src/stlc/html/Lecture8.html)
+
+- Removed Peirce and spines: [Lecture8NoPeirce.agda](src/stlc/Lecture8NoPeirce.agda), [rendered](src/stlc/html/Lecture8NoPeirce.html)
+
 - Individual modules:
   - Intrinsically typed terms: [Term.agda](src/stlc/Term.agda), [rendered](src/stlc/html/Term.html)
   - Kripke models: [KripkeModel.agda](src/stlc/Term/KripkeModel.agda), [rendered](src/stlc/html/Term.KripkeModel.html)

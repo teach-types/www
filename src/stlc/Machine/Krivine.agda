@@ -227,6 +227,8 @@ K→w app                    =  whd0 refl
 ⌜_⌝ : Prg c → State c
 ⌜ t ⌝ = ⟨ t , ε ⟩ ∙ []
 
+-- Some round-trip properties of encoding and decoding
+
 round : ⦅ ⌜ t ⌝ ⦆ ≡ t
 round = sub-id
 
@@ -243,50 +245,18 @@ enc-app : ⌜ app t u ⌝ ⟶K ⌜ t ⌝ ∙ₜ u
 enc-app = app
 
 -- The simulation has to be formulated as follows:
--- If t ⟶w t' then ⌜ t ⌝ ⟶K* q with ⦅ q ⦆ ≡ t'
-
-
-data _⟶wK_ (t t' : Prg c) : Set where
-  steps : ∀ q' (rs : ⌜ t ⌝ ⟶K* q') (rhs : ⦅ q' ⦆ ≡ t') → t ⟶wK t'
-
--- extwK : t ⟶wK t' → app t u ⟶wK app t u
--- extwK {u = u} (steps q q' refl rs rhs) =  steps (q ∙ₜ u) (q' ∙ₜ u) (≡.sym (round-app {q = q})) (appM* rs) ({!round-app {q = {!q!}}!})
--- --  steps {!extM* {s = ⟨ u , ε ⟩ ∷ []}  rs!} {!!}
-
-w→wK : t ⟶w t' → t ⟶wK t'
-w→wK (β {t = t}{u = u})
-    = steps _ (app ∷ abs ∷ []) (cong (λ u → sub (sg u) t) sub-id)
-w→wK (appl {u = u} r) with w→wK r
-... | steps q' rs refl
-    = steps (q' ∙ₜ u) (app ∷ appM* rs) (round-app {q = q'})
-
--- Simulation of weak head reduction by the Krivine machine
+-- If t ⟶w t' then ⌜ t ⌝ ⟶K* q for some state q with ⦅ q ⦆ ≡ t'.
 
 w→K : t ⟶w t' → ∃ λ q → ⌜ t ⌝ ⟶K* q × ⦅ q ⦆ ≡ t'
-w→K r with w→wK r
-... | steps q rs refl = q , rs , refl
 
-{-
+-- Case β: step app and abs
+w→K (β {t = t}{u = u}) = _ , app ∷ abs ∷ [] , cong (λ u → sub (sg u) t) sub-id
 
-data _⟶wK_ (t t' : Prg c) : Set where
-  steps : ∀ q q' (lhs : t ≡ ⦅ q ⦆) (rs : q ⟶K* q') (rhs : ⦅ q' ⦆ ≡ t') → t ⟶wK t'
+-- Case appl: step app and continue
+w→K (appl {u = u} r) with w→K r
+... | q' , rs , refl
+    = q' ∙ₜ u , app ∷ appM* rs , round-app {q = q'}
 
--- extwK : t ⟶wK t' → app t u ⟶wK app t u
--- extwK {u = u} (steps q q' refl rs rhs) =  steps (q ∙ₜ u) (q' ∙ₜ u) (≡.sym (round-app {q = q})) (appM* rs) ({!round-app {q = {!q!}}!})
--- --  steps {!extM* {s = ⟨ u , ε ⟩ ∷ []}  rs!} {!!}
-
-w→wK : t ⟶w t' → t ⟶wK t'
-w→wK (β {t = t}{u = u})
-    = steps ⌜ app (abs t) u ⌝ _ (≡.sym round) (app ∷ abs ∷ []) (cong (λ u → sub (sg u) t) sub-id)
-w→wK (appl {u = u} r) with w→wK r
-... | steps q q' refl rs refl
-    = steps (q ∙ₜ u) (q' ∙ₜ u) (≡.sym (round-app {q = q})) (appM* rs) (round-app {q = q'})
-
--- Simulation of weak head reduction by the Krivine machine
-
-w→K : t ⟶w t' → ∃ λ q → ⌜ t ⌝ ⟶K* q × ⦅ q ⦆ ≡ t
-w→K r with w→wK r
-... | steps q q' refl rs refl = {!q' , rs , ?!}
 
 -- -}
 -- -}

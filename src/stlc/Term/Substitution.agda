@@ -83,7 +83,7 @@ private
     a b : Ty
     Γ Δ Φ : Context
 
--- "Parallel" / "simulatenous" substitutions Sub Γ Δ
+-- "Parallel" / "simultaneous" substitutions Sub Γ Δ
 -- are lists of terms living in Γ,
 -- one for each variable bound in Δ.
 

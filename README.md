@@ -206,6 +206,35 @@ Agda code:
   - Weakening: [Weakening.agda](src/stlc/Term/Weakening.agda), [rendered](src/stlc/html/Term.Weakening.html)
   - Normalization: [NbE.agda](src/stlc/Term/Normalization/NbE.agda), [rendered](src/stlc/html/Term.Normalization.NbE.html)
 
+## Lecture 9
+
+### Reduction: role and definition
+
+- Decide an equational theory by reduction, orienting the equations
+- β-reduction: small-step reduction for call-by-name lambda-calculus
+- Why η-reduction and η-expansion are problematic
+- Parallel substitution
+- Substitution needs weakening when going under λ
+
+### Confluence properties
+
+- Church-Rosser, confluence, diamond, local confluence
+­ Single step β-reduction violates diamond since substitution duplicates terms
+- Single step β-reduction is locally confluent
+
+### Confluence via parallel reduction (Tait and Martin-Löf, Takahashi)
+
+- Parallel reduction: contract some visible redexes in one step
+- Complete development: contract all visible redexes in one step
+- Parallel reduction has the diamond property; thus, one-step reduction is confluent
+
+### Standard reduction
+
+- Weak head reduction
+- Standard reduction sequences, defined inductively
+- Standardization: every reduction sequence can be transformed into a standard one
+
+Agda code: entrypoint [Lecture9.agda](src/stlc/Lecture9.agda), [rendered](src/stlc/html/Lecture9.html)
 
 ## 2025 Lecture 8
 
@@ -216,7 +245,7 @@ Agda code:
 
 Agda code (expressions in spine form, superseded by lecture 9): [live code start](live/stlc-spine/), [full](src/stlc-spine/), [rendered](src/stlc-spine/html/Lecture8.html)
 
-## Lecture 9
+## 2025 Lecture 9
 
 Implementation of simply-typed lambda-calculus (STLC), continued.
 

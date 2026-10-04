@@ -8,6 +8,7 @@ all: index.html html test
 html :
 	agda --html Lecture8.agda
 	agda --html Lecture8NoPeirce.agda
+	agda --html Lecture9.agda
 	agda --html Lecture10.agda
 
 .PHONY: index.html

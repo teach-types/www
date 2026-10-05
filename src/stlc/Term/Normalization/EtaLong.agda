@@ -62,21 +62,20 @@ record wn (t : Term Γ a) : Set where
 -- wn/wne have the same closure properties as normal form,
 -- plus they are closed under equality.
 
-mutual
-  wne-var : wne (var x)
-  wne-var = wneu _ var refl
+wne-var : wne (var x)
+wne-var = wneu _ var refl
 
-  wne-app : wne t → wn u → wne (app t u)
-  wne-app (wneu _ neu rt) (wnorm _ nf ru) = wneu _ (app neu nf) (app rt ru)
+wne-app : wne t → wn u → wne (app t u)
+wne-app (wneu _ neu rt) (wnorm _ nf ru) = wneu _ (app neu nf) (app rt ru)
 
-  wn-abs  : wn t → wn (abs t)
-  wn-abs (wnorm _ nf rs) = wnorm _ (abs nf) (abs rs)
+wn-abs  : wn t → wn (abs t)
+wn-abs (wnorm _ nf rs) = wnorm _ (abs nf) (abs rs)
 
-  wne→wn  : {t : Term Γ (` α)} → wne t → wn t
-  wne→wn (wneu _ neu rs) = wnorm _ (ne neu) rs
+wne→wn  : {t : Term Γ (` α)} → wne t → wn t
+wne→wn (wneu _ neu rs) = wnorm _ (ne neu) rs
 
-  expand-wn : t ≅ t' → wn  t' → wn  t
-  expand-wn w (wnorm _ nf rs) = wnorm _ nf (≅trans w rs)
+expand-wn : t ≅ t' → wn  t' → wn  t
+expand-wn w (wnorm _ nf rs) = wnorm _ nf (≅trans w rs)
 
 -- We cannot directly show that each well-typed term has a normal form,
 -- since this property is not closed under application a priori.

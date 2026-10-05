@@ -6,6 +6,7 @@
 module Term.Reduction.Standard where
 
 open import Prelude
+open import Prelude.Reduction
 open import Term
 open import Term.Weakening renaming (lookup to lookupR)
 open import Term.Substitution
@@ -34,16 +35,16 @@ data _⟶s_ : (t t' : Term Γ a) → Set where
 
 -- Standard reduction is reflexive
 
-reflS : (t : Term Γ a) → t ⟶s t
-reflS (var x)    =  var
-reflS (abs t)    =  abs (reflS t)
-reflS (app t u)  =  app (reflS t) (reflS u)
+reflS : t ⟶s t
+reflS {t = var x}    =  var
+reflS {t = abs t}    =  abs (reflS {t = t})
+reflS {t = app t u}  =  app (reflS {t = t}) (reflS {t = u})
 
 -- Standard reduction is closed under renaming
 
 wkS : t ⟶s t' → wk ρ t ⟶s wk ρ t'
 wkS {ρ = ρ} (w ∷ s)     =  wkW w ∷ wkS s
-wkS {ρ = ρ} var         =  reflS _
+wkS {ρ = ρ} var         =  reflS
 wkS {ρ = ρ} (abs s)     =  abs (wkS s)
 wkS {ρ = ρ} (app s s₁)  =  app (wkS s) (wkS s₁)
 
@@ -59,7 +60,7 @@ data _⟶S_ : (σ σ' : Sub Γ Δ) → Set where
 
 reflSS : σ ⟶S σ
 reflSS {σ = ε}      =  ε
-reflSS {σ = σ ∙ t}  =  reflSS ∙ reflS t
+reflSS {σ = σ ∙ t}  =  reflSS ∙ reflS
 
 idSS : (idS {Γ = Γ}) ⟶S idS
 idSS = reflSS
@@ -77,7 +78,7 @@ weakS ε        =  ε
 weakS (S ∙ s)  =  weakS S ∙ wkS s
 
 liftS : (S : σ ⟶S σ') → lift {a = a} σ ⟶S lift σ'
-liftS S = weakS S ∙ reflS _
+liftS S = weakS S ∙ reflS
 
 -- Standard reduction is closed under standard-reduced substitutions
 
@@ -98,6 +99,13 @@ snocWh : (s : t ⟶s abs t') (s₁ : u ⟶s u') → app t u ⟶s t' [ u' ]₀
 snocWh (w ∷ s)  s₁  =  appl w ∷ snocWh s s₁
 snocWh (abs s)  s₁  =  β ∷ sub1S s s₁
 
+-- Appending a weak head reduction step at the end of a standard sequence
+
+snocSW : (s : t ⟶s t') (r : t' ⟶w t'') → t ⟶s t''
+snocSW (w ∷ s)     r         =  w ∷ snocSW s r
+snocSW (app s s₁)  β         =  snocWh s s₁
+snocSW (app s s₁)  (appl w)  =  app (snocSW s w) s₁
+
 -- Appending a reduction step at the end of a standard sequence
 
 snocS : (s : t ⟶s t') (r : t' ⟶ t'') → t ⟶s t''
@@ -107,13 +115,36 @@ snocS (app s s₁)  β         =  snocWh s s₁
 snocS (app s s₁)  (appl r)  =  app (snocS s r) s₁
 snocS (app s s₁)  (appr r)  =  app s (snocS s₁ r)
 
--- Turning a reduction sequence into a standard sequence, beginning to end
+-- Appending a reduction sequence at the end of a standard sequence
 
-standardizeˢ : t ⟶*ˢ t' → t ⟶s t'
-standardizeˢ []        =  reflS _
-standardizeˢ (rs ▷ r)  =  snocS (standardizeˢ rs) r
+appendS : (s : t ⟶s t') (rs : t' ⟶* t'') → t ⟶s t''
+appendS s []       = s
+appendS s (r ∷ rs) = appendS (snocS s r) rs
 
 -- Standardization theorem
 
 standardize : t ⟶* t' → t ⟶s t'
-standardize = standardizeˢ ∘ reverse*
+standardize = appendS reflS
+
+-- Another proof, using reversed reduction sequences.
+-- Turning a reduction sequence into a standard sequence, beginning to end
+
+standardizeˢ : t ⟶*ˢ t' → t ⟶s t'
+standardizeˢ []        =  reflS
+standardizeˢ (rs ▷ r)  =  snocS (standardizeˢ rs) r
+
+------------------------------------------------------------------------
+-- Standard reduction sequence to ordinary reduction sequence
+
+-- Unfolding a standard reduction sequence into an ordinary reduction sequence
+
+unfoldS : t ⟶s t' → t ⟶* t'
+unfoldS (w ∷ s)     =  unfoldW w ∷ unfoldS s
+unfoldS var         =  []
+unfoldS (abs s)     =  absR* (unfoldS s)
+unfoldS (app s s₁)  =  applR* (unfoldS s) ◅◅ apprR* (unfoldS s₁)
+
+-- Corollary: standard reduction sequences concatenate
+
+transS : (s : t ⟶s t') (s' : t' ⟶s t'') → t ⟶s t''
+transS s s' = appendS s (unfoldS s')

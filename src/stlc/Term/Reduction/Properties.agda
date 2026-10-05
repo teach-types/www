@@ -19,7 +19,7 @@ private
     σ σ' : Sub Γ Δ
     ρ : Wk Γ Δ
 
--- Closure under weakening
+-- Closure of weah head reduction under weakening
 
 wkW : (w : t ⟶w t') → wk ρ t ⟶w wk ρ t'
 wkW {ρ = ρ} (β {t = t} {u = u}) =
@@ -28,6 +28,8 @@ wkW {ρ = ρ} (β {t = t} {u = u}) =
     (wk-sg {t = t})  -- wk (keep ρ) t) [ wk ρ u ]₀  ≡ wk ρ (t [ u ]₀)
     β
 wkW (appl w) = appl (wkW w)
+
+-- Closure of reduction under weakening
 
 wkR : (r : t ⟶ t') → wk ρ t ⟶ wk ρ t'
 wkR {ρ = ρ}  (β {t = t} {u = u}) =
@@ -39,7 +41,7 @@ wkR {ρ = ρ} (appl r) = appl (wkR r)
 wkR {ρ = ρ} (appr r) = appr (wkR r)
 wkR {ρ = ρ} (abs r) = abs (wkR r)
 
--- Closure under substitution
+-- Closure of weak head reduction under substitution
 
 subW : (w : t ⟶w t') → sub σ t ⟶w sub σ t'
 -- subW β = subst (_ ⟶w_) (sym sub-sg) β -- not enough information
@@ -49,6 +51,8 @@ subW {σ = σ} (β {t = t} {u = u}) =
     (sym (sub-sg {σ = σ} {t = t} {u = u}))
     β
 subW (appl w) = appl (subW w)
+
+-- Closure of reduction under substitution
 
 subR1 : (r : t ⟶ t') → sub σ t ⟶ sub σ t'
 subR1 {σ = σ} (β {t = t} {u = u}) =
@@ -117,3 +121,9 @@ subR1S {t' = t'} r σs = subR1 r ∷ sub*S {t = t'} σs
 
 subR*S :  (rs : t ⟶* t') (σs : σ ⟶*S σ') → sub σ t ⟶* sub σ' t'
 subR*S {t' = t'} rs σs = subR* rs Star.◅◅ sub*S {t = t'} σs
+
+-- Closure of multi-step weak head reduction
+
+applW* : t ⟶w* t' → app t u ⟶w* app t' u
+applW* [] = []
+applW* (r ∷ rs) = appl r ∷ applW* rs

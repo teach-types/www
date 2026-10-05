@@ -2,7 +2,7 @@ module Prelude.Reduction where
 
 open import Prelude
 open import Relation.Binary.Construct.Closure.ReflexiveTransitive public
-  using (Star) hiding (module Star) renaming (ε to []; _◅_ to _∷_)
+  using (Star; _◅◅_) hiding (module Star) renaming (ε to []; _◅_ to _∷_)
 open import Relation.Binary.Rewriting public using (Confluent)
 
 module Star where

@@ -14,14 +14,6 @@ private
     t t' t'' u u' : Term Γ a
     σ σ' : Sub Γ Δ
 
--- One step weak head reduction
-
-infix 1 _⟶w_
-
-data _⟶w_ : (t t' : Term Γ a) → Set where
-  β    : app (abs t) u ⟶w t [ u ]₀
-  appl : (w : t ⟶w t') → app t u ⟶w app t' u
-
 -- Full one-step reduction
 
 infix 1 _⟶_
@@ -60,3 +52,22 @@ reverse* (r ∷ rs) = consˢ r (reverse* rs)
 data _⟶*S_ : (σ σ' : Sub Γ Δ) → Set where
   ε  : (ε {Γ = Γ}) ⟶*S ε
   _∙_ :  (rσ : σ ⟶*S σ') (rs : t ⟶* t') → (σ ∙ t) ⟶*S (σ' ∙ t')
+
+-- One step weak head reduction
+
+infix 1 _⟶w_
+
+data _⟶w_ : (t t' : Term Γ a) → Set where
+  β    : app (abs t) u ⟶w t [ u ]₀
+  appl : (w : t ⟶w t') → app t u ⟶w app t' u
+
+-- Multi-step weak head reduction
+
+_⟶w*_ : (t t' : Term Γ a) → Set
+_⟶w*_ = Star _⟶w_
+
+-- Weak head reduction is a reduction
+
+unfoldW : t ⟶w t' → t ⟶ t'
+unfoldW β = β
+unfoldW (appl r) = appl (unfoldW r)

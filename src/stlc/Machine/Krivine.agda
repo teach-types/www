@@ -187,20 +187,21 @@ lookup-sound {ρ = ρ ∙ k} {x = suc x} = lookup-sound {ρ = ρ}
 
 -- app (sub σ (abs t)) u ≡ sub (σ ∙ u) t
 
-lem0 : (sub (lift σ) t) [ u ]₀ ≡ sub (σ ∙ u) t
-lem0 {σ = σ} {t = t} {u = u} = begin
-   sub (sg u) (sub (lift σ) t)        ≡⟨ sub-comp {σ = sg u} {σ' = lift σ} {t = t} ⟩
-   sub (compSS (sg u) (weak σ) ∙ u) t ≡⟨ cong (λ σ → sub (σ ∙ u) t) comp-sg-weak  ⟩
+simp-β-clos : (sub (lift σ) t) [ u ]₀ ≡ sub (σ ∙ u) t
+simp-β-clos {σ = σ} {t = t} {u = u} = begin
+   sub (sg u) (sub (lift σ) t)         ≡⟨ sub-comp {σ = sg u} {σ' = lift σ} {t = t} ⟩
+   sub (compSS (sg u) (lift σ)) t      ≡⟨⟩
+   sub (compSS (sg u) (weak σ) ∙ u) t  ≡⟨ cong (λ σ → sub (σ ∙ u) t) comp-sg-weak  ⟩
    sub (σ ∙ u) t   ∎
   where open ≡-Reasoning
 
 -- Application of a function closure weak-head reduces to the closed body
 
-lem : app (sub σ (abs t)) u ⟶w sub (σ ∙ u) t
-lem {σ = σ} {t = t} {u = u} =
+β-clos : app (sub σ (abs t)) u ⟶w sub (σ ∙ u) t
+β-clos {σ = σ} {t = t} {u = u} =
   ≡.subst
     (app (abs (sub (lift σ) t)) u ⟶w_)
-    (lem0 {σ = σ}{t = t}{u = u})
+    (simp-β-clos {σ = σ}{t = t}{u = u})
     (β {t = sub (lift σ) t} {u = u})
 
 -- Every step in the Krivine machine corresponds to 0 or 1 weak-head reduction steps.
@@ -210,7 +211,7 @@ lem {σ = σ} {t = t} {u = u} =
 K→w : q ⟶K q' → ⦅ q ⦆ ⟶w? ⦅ q' ⦆
 
 -- 1 whd step:
-K→w (abs {t = t} {ρ = ρ} {k = k} {s = s}) = whd1 (appsWhd {s = s} (lem {σ = ⦅ ρ ⦆ₑ}{t = t}{u = ⦅ k ⦆ₖ} ))
+K→w (abs {t = t} {ρ = ρ} {k = k} {s = s}) = whd1 (appsWhd {s = s} (β-clos {σ = ⦅ ρ ⦆ₑ}{t = t}{u = ⦅ k ⦆ₖ} ))
   -- Goal:  app (abs (sub (lift ⦅ ρ ⦆ₑ) t)) ⦅ k ⦆ₖ ⟶w sub (⦅ ρ ⦆ₑ ∙ ⦅ k ⦆ₖ) t
 
 -- no whd steps:

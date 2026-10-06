@@ -386,6 +386,40 @@ wk1-sub {σ = σ} {t = t} =
   sub (compSW (lift σ) skip1) t  ≡⟨ sym (sub-wk {t = t}) ⟩
   sub (lift σ) (wk1 t)  ∎
 
+-- Empty substitution
+
+sub-ε : sub ε t ≡ t
+sub-ε = sub-id
+
+
+private
+  -- A step in contraction-after-weakening
+  -- done the explicit way.
+  lem0 : (compSW (weak (fromWk idW)) idW ∙ var zero) ≡ idS {Γ = Γ ∙ a}
+  lem0 {Γ = Γ} {a = a} = begin
+    (compSW (weak (fromWk idW)) idW ∙ var zero)  ≡⟨ comp-S-idW {ρ = idW} ⟩
+    (weak (fromWk idW) ∙ var zero)               ≡⟨⟩
+    (compWS skip1 (fromWk idW) ∙ var zero)       ≡⟨⟩
+    (fromWk skip1 ∙ var zero)                    ≡⟨⟩
+    (fromWk idW)                                 ≡⟨⟩
+    idS ∎ where open ≡-Reasoning
+
+-- Eta contraction
+-- The renaming ⇑↑ : Γ.a.a ≤ Γ.a has an inverse,
+-- the substitution id.0 : Γ.a ⊢ Γ.a.a,
+-- so we have (⇑↑ t)[id.0] ≡ t.
+contraction-after-weakening : wk (keep (skip idW)) t [ var zero ]₀ ≡ t
+contraction-after-weakening {t = t} = begin
+  wk (keep (skip idW)) t [ var zero ]₀                        ≡⟨ sub-wk {σ = idS ∙ var zero} {t = t} ⟩
+  sub (compSW (idS ∙ var zero) (keep (skip idW)))           t ≡⟨⟩                                               -- lem0 begin
+  sub (compSW idS                   (skip idW) ∙ var zero)  t ≡⟨⟩
+  sub (compSW (weak idS ∙ var zero) (skip idW) ∙ var zero)  t ≡⟨⟩
+  sub (compSW (weak idS)            idW        ∙ var zero)  t ≡⟨⟩
+  sub (compSW (weak idS ∙ var zero) (keep idW))             t ≡⟨⟩
+  sub (compSW idS idW)                                      t ≡⟨ cong (λ σ → sub σ t) (comp-S-idW {ρ = idW}) ⟩  -- lem0 end
+  sub idS                                                   t ≡⟨ sub-id ⟩
+  t ∎ where open ≡-Reasoning
+
 -- -}
 -- -}
 -- -}

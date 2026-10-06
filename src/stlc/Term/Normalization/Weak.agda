@@ -8,9 +8,9 @@ open import Prelude
 open import Prelude.Reduction
 open import Term
 open import Term.Weakening renaming (lookup to lookupR)
-open import Term.Weakening.Properties    using (wk-id; wk-wk)
+open import Term.Weakening.Properties using (wk-id; wk-wk)
 open import Term.Substitution
-open import Term.Substitution.Properties using (sub-id; sub-S-sg; wk-sg)
+open import Term.Substitution.Properties using (sub-id; sub-S-sg; wk-sg; contraction-after-weakening)
 open import Term.Reduction
 open import Term.Reduction.Properties
 open import Term.Reduction.Standard
@@ -218,8 +218,11 @@ mutual
 -- Lemma: if  WN (app (↑ t) x₀)  then  WN t.
 
 WN-η-contract : ∀ {t : Term Γ (a ⇒ b)} → WN (app (wk (skip idW) t) (var zero)) → WN t
-WN-η-contract (ne (app wne _)) = ne (WNe-strengthen wne)
-WN-η-contract (exp w wn) = {!!}
+WN-η-contract                (ne (app wne _))  = ne (WNe-strengthen wne)
+WN-η-contract {t = var x}    (exp (appl ()) wn)
+WN-η-contract {t = abs t}    (exp β wn)        = abs (≡.subst WN contraction-after-weakening wn)
+WN-η-contract {t = app t t₁} (exp (appl w) wn) with whd-strengthen w
+... | _ , w' , refl = exp w' (WN-η-contract wn)
 
 ------------------------------------------------------------------------
 -- Normalization proof by reducibility.

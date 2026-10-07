@@ -297,15 +297,7 @@ data _⟶w?_ (t u : Term Γ a) : Set where
   whd1 : t ⟶w u → t ⟶w? u
   whd0 : t ≡ u → t ⟶w? u
 
--- Lemma: ⟶w? is closed under application.
-
-appWhd? : t ⟶w? t' → app t u ⟶w? app t' u
-appWhd? (whd1 r)     =  whd1 (appl r)
-appWhd? (whd0 refl)  =  whd0 refl
-
-appsWhd? : t ⟶w? t' → t ∙⦅ s ⦆ₛ ⟶w? t' ∙⦅ s ⦆ₛ
-appsWhd? {s = []}    r  =  r
-appsWhd? {s = k ∷ s} r  =  appsWhd? {s = s} (appWhd? r)
+-- Lemma: ⟶w is closed under an application spine.
 
 appsWhd : t ⟶w t' → t ∙⦅ s ⦆ₛ ⟶w t' ∙⦅ s ⦆ₛ
 appsWhd {s = []}    r  =  r
@@ -363,9 +355,6 @@ round-app {q = q} {u = u} = ≡.subst
   (λ v →  ⦅ q ∙ₜ u ⦆ ≡ (app _ v))
   sub-id
   (round-ext {q = q} {s = ⟨ u , ε ⟩ ∷ []})
-
-enc-app : ⌜ app t u ⌝ ⟶K ⌜ t ⌝ ∙ₜ u
-enc-app = app
 
 -- The simulation has to be formulated as follows:
 -- If t ⟶w t' then ⌜ t ⌝ ⟶K* q for some state q with ⦅ q ⦆ ≡ t'.

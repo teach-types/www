@@ -21,7 +21,7 @@ private
     t t' u : Term Γ a
     σ σ' : Sub Γ Δ
 
--- Programs are closed term
+-- Programs are closed terms
 
 Prg = Term ε
 
@@ -80,6 +80,7 @@ infix 4 _⟶K*_
 _⟶K*_ : (q q' : State c) → Set
 _⟶K*_ {c = c} = Star (_⟶K_ {c = c})
 
+------------------------------------------------------------------------
 -- Closure under application
 
 -- Stacks are closed under extension
@@ -184,16 +185,6 @@ appsWhd {s = k ∷ s} r  =  appsWhd {s = s} (appl r)
 lookup-sound : lookupₛ ⦅ ρ ⦆ₑ x ≡ ⦅ lookup ρ x ⦆ₖ
 lookup-sound {ρ = ρ ∙ k} {x = zero}  = refl
 lookup-sound {ρ = ρ ∙ k} {x = suc x} = lookup-sound {ρ = ρ}
-
--- app (sub σ (abs t)) u ≡ sub (σ ∙ u) t
-
-simp-β-clos : (sub (lift σ) t) [ u ]₀ ≡ sub (σ ∙ u) t
-simp-β-clos {σ = σ} {t = t} {u = u} = begin
-   sub (sg u) (sub (lift σ) t)         ≡⟨ sub-comp {σ = sg u} {σ' = lift σ} {t = t} ⟩
-   sub (compSS (sg u) (lift σ)) t      ≡⟨⟩
-   sub (compSS (sg u) (weak σ) ∙ u) t  ≡⟨ cong (λ σ → sub (σ ∙ u) t) comp-sg-weak  ⟩
-   sub (σ ∙ u) t   ∎
-  where open ≡-Reasoning
 
 -- Application of a function closure weak-head reduces to the closed body
 

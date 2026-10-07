@@ -420,6 +420,19 @@ contraction-after-weakening {t = t} = begin
   sub idS                                                   t ≡⟨ sub-id ⟩
   t ∎ where open ≡-Reasoning
 
+-- A property to apply function closures:
+--
+-- app (sub σ (abs t)) u ≡ sub (σ ∙ u) t
+
+simp-β-clos : (sub (lift σ) t) [ u ]₀ ≡ sub (σ ∙ u) t
+simp-β-clos {σ = σ} {t = t} {u = u} = begin
+   sub (sg u) (sub (lift σ) t)         ≡⟨ sub-comp {σ = sg u} {σ' = lift σ} {t = t} ⟩
+   sub (compSS (sg u) (lift σ)) t      ≡⟨⟩
+   sub (compSS (sg u) (weak σ) ∙ u) t  ≡⟨ cong (λ σ → sub (σ ∙ u) t) comp-sg-weak  ⟩
+   sub (σ ∙ u) t   ∎
+  where open ≡-Reasoning
+
+
 -- -}
 -- -}
 -- -}

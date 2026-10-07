@@ -216,14 +216,6 @@ appsV : t ⟶v t' → t ∙⦅ s ⦆ₛ ⟶v t' ∙⦅ s ⦆ₛ
 appsV {s = []}    r  =  r
 appsV {s = k ∷ s} r  =  appsV {s = s} ((appVₖ r))
 
-appV?ₖ : t ⟶v? t' → t ∙⦅ k ⦆ₖ ⟶v? t' ∙⦅ k ⦆ₖ
-appV?ₖ (wv1 r)     =  wv1 (appVₖ r)
-appV?ₖ (wv0 refl)  =  wv0 refl
-
-appsV? : t ⟶v? t' → t ∙⦅ s ⦆ₛ ⟶v? t' ∙⦅ s ⦆ₛ
-appsV? {s = []}    r  =  r
-appsV? {s = k ∷ s} r  =  appsV? {s = s} ((appV?ₖ r))
-
 -- Lemma: soundness of environment lookup
 
 lookup-sound : Sub.lookup ⦅ ρ ⦆ₑ x ≡ ⦅ lookup ρ x ⦆ᵥ
@@ -281,29 +273,3 @@ v→CEK (appl {t = t} {t' = t'} {u = u} r) with v→CEK r
 
 v→CEK (appr {u = u} {u' = u'} {t = t} r) with v→CEK r
 ... | q' , rs , refl = q' ∙ₖ ⟨λ t , ε ⟩ ∙□ , app ∷ abs ∷ eval ∷ appM* rs , round-beta {q = q'}
-
-
--- TRASH
-
-  -- abs   : (abs t)    [ ρ ]∙ (□∙⟨ u , ρ' ⟩ ∷ s) ⟶C  u [ ρ' ] (⟨λ t , ρ ⟩ ∙□ ∷ s)
-  -- var[] : x [ ρ ] [] ⟶C done (lookup ρ x)
-  -- varA  : x [ ρ ] (□∙ u ∷ s) ⟶C u [ ρ ] (lookup ρ x ∙□ ∷ s)
-  -- varF  : x [ ρ ] (⟨λ t , ρ' ⟩ ∙□ ∷ s) ⟶C t [ ρ' ∙ lookup ρ x ] s
-  -- abs   : abs t [ ρ ] (□∙ u ∷
-
-
--- -- -- Constructing a state from function value and stack
-
--- valState : (v : Val a) (s : Stack a c) → State c
--- valState ⟨λ t , ρ ⟩ (□∙ u ∷ s)
-
--- -- Lookup (x : a ∈ Γ) (ρ : Env Γ) (s : Stack a c) → State
-
-
--- -}
--- -}
--- -}
--- -}
--- -}
--- -}
--- -}

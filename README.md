@@ -40,10 +40,10 @@ This schedule is preliminary!
 | Thu 24/09   | 10-12   | TC | 07 [Introduction to operational semantics and type systems](#lecture-7)  |  |
 | Mon 28/09   | 13-15   | AA | 08 [Simply typed lambda calculus and normalization by evaluation](#lecture-8)  |  |
 | _Mon 28/09_ | _15-17_ | AA | [More on Agda](#exercise-4) | _Homework 3 due_  |
-| Thu 01/10   | 10-12   | AA | 09 [More on operational semantics and type systems in Agda](#lecture-9)  |  |
-| Mon 05/10   | 13-15   | AA | 10 [More on operational semantics and type systems in Agda](#lecture-10) |  |
+| Thu 01/10   | 10-12   | AA | 09 [Confluence and Standardization](#lecture-9)  |  |
+| Mon 05/10   | 13-15   | AA | 10 [Weak and Strong Normalization](#lecture-10) |  |
 | _Mon 05/10_ | _15-17_ | AA | [Exercises on operational semantics and type systems in Agda](#exercise-5) | _Homework 4 due_  |
-| Thu 08/10   | 10-12   | AA | 11 [More on operational semantics and type systems in Agda](#lecture-11) | *Danielsson: MSc topics* |
+| Thu 08/10   | 10-12   | AA | 11 [Machines: Krivine and CEK](#lecture-11) | *Danielsson: MSc topics* |
 | Mon 12/10   | 13-15   | TC | Student presentations |   |
 | Mon 12/10   | 15-17   | TC | Student presentations |   |
 | Thu 15/10   | 10-12   | TC | Student presentations |   |
@@ -236,6 +236,33 @@ Agda code:
 
 Agda code: entrypoint [Lecture9.agda](src/stlc/Lecture9.agda), [rendered](src/stlc/html/Lecture9.html)
 
+## Lecture 10
+
+Normalization for typed lambda-calculus
+
+- weak and strong normalization
+- SN implies WN
+- Newman's lemma: SN plus local confluence implies confluence
+- reducibility
+- proof of weak normalization via reducibility
+
+[Agda code](src/stlc/Term/Normalization/Weak.agda) ([rendered](src/stlc/html/Term.Normalization.Weak.html))
+
+## Lecture 11
+
+- Krivine abstract machine for call-by-name evaluation
+- Call-by-value lambda-calculus
+- CEK (control-environment-continuation) for call-by-value
+
+Agda code:
+
+- [Krivine machine](src/stlc/Machine/Krivine.agda) ([rendered](src/stlc/html/Machine.Krivine.html))
+- [call-by-value](src/stlc/Term/CallByValue.agda) ([rendered](src/stlc/html/Term.CallByValue.html))
+- [CEK machine](src/stlc/Machine/CEK.agda) ([rendered](src/stlc/html/Machine.CEK.html))
+
+2025 lectures
+=============
+
 ## 2025 Lecture 8
 
 - Well-typed lambda-terms
@@ -260,7 +287,7 @@ Implementation of simply-typed lambda-calculus (STLC), continued.
 
 Agda live code: [start](live/stlc-lec9-start/), [finish](live/stlc-check/), [solution](src/stlc-check/), [rendered](src/stlc-check/html/Lecture9.html)
 
-## Lecture 10
+## 2025 Lecture 10
 
 Normalization for typed lambda-calculus
 
@@ -272,16 +299,6 @@ Normalization for typed lambda-calculus
 - reducibility
 
 Agda live code: [start](live/stlc/), [solution](src/stlc/), [rendered](src/stlc/html/Lecture10.html)
-
-
-## Lecture 11
-
-Possible topics:
-
-- Confluence in Agda (Parallel substituion method)
-- Machine (KAM) for classical logic (Peirce CC)
-
-
 
 Software
 ========

@@ -43,7 +43,7 @@ This schedule is preliminary!
 | Thu 01/10   | 10-12   | AA | 09 [Confluence and Standardization](#lecture-9)  |  |
 | Mon 05/10   | 13-15   | AA | 10 [Weak and Strong Normalization](#lecture-10) |  |
 | _Mon 05/10_ | _15-17_ | AA | [Exercises on operational semantics and type systems in Agda](#exercise-5) | _Homework 4 due_  |
-| Thu 08/10   | 10-12   | AA | 11 [Machines: Krivine and CEK](#lecture-11) | *Danielsson: MSc topics* |
+| Thu 08/10   | 10-12   | AA | 11 [Machines: Krivine and CEK](#lecture-11) | [Danielsson: MSc topics](slides/MscProposals2026.pdf) |
 | Mon 12/10   | 13-15   | TC | Student presentations |   |
 | Mon 12/10   | 15-17   | TC | Student presentations |   |
 | Thu 15/10   | 10-12   | TC | Student presentations |   |

@@ -10,7 +10,7 @@ html :
 	agda --html Lecture8NoPeirce.agda
 	agda --html Lecture9.agda
 	agda --html Lecture10.agda
-	agda --html Everything.agda
+	agda --html EverythingSTLC.agda
 
 .PHONY: index.html
 index.html :
